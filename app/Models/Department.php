@@ -10,4 +10,8 @@ class Department extends Model
         'department_name',
     ];
 
+    public function employe()
+    {
+        return $this->hasMany(User::class);
+    }
 }

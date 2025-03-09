@@ -1,3 +1,4 @@
+{{-- @dd($departments) --}}
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
@@ -17,6 +18,24 @@
             <div class="mt-4">
                 <x-label for="email" value="{{ __('Email') }}" />
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+            </div>
+
+            <div class="mt-4">
+                <label for="department" class="block text-sm font-medium text-gray-700">Department</label>
+                <select id="department" name="department_id" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                    <option value="">Select a department</option>
+                    @foreach($departments as $department)
+                        <option value="{{ $department->id }}">{{ $department->department_name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="mt-4">
+                <label for="accountType" class="block text-sm font-medium text-gray-700">Accout type</label>
+                <select id="accountType" name="accountType" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                    <option value="bureauDordre">Order office</option>
+                    <option value="employee">Employee</option>
+                </select>
             </div>
 
             <div class="mt-4">

@@ -20,6 +20,9 @@ return new class extends Migration
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
+            $table->enum('accountType', ['admin', 'bureauDordre', 'employee']); 
+            $table->boolean('is_active')->default(false);
+            $table->foreignId('department_id')->constrained('departments')->onDelete('cascade');
             $table->timestamps();
         });
 

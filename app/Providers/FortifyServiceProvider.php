@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Laravel\Fortify\Fortify;
+use App\Models\Department; // Department model to send it to register view
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -41,6 +42,16 @@ class FortifyServiceProvider extends ServiceProvider
 
         RateLimiter::for('two-factor', function (Request $request) {
             return Limit::perMinute(5)->by($request->session()->get('login.id'));
+        });
+
+        Fortify::registerView(function () {
+
+            $departments = Department::all(); // Replace with your actual query
+
+            // Return the registration view with the variable
+            return view('auth.register', [
+                'departments' => $departments,
+            ]);
         });
     }
 }
