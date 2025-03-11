@@ -1,12 +1,16 @@
 <?php
 
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\FileController;
 use Illuminate\Support\Facades\Route;
 
 
+
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('files.index');
 });
+
+Route::resource('files', FileController::class);
 
 Route::middleware([
     'auth:sanctum',
