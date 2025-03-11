@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 class File extends Model
@@ -12,10 +13,9 @@ class File extends Model
         'requires_approval',
         'approval_deadline',
         'uploaded_by',
-
     ];
 
-    public function employe()
+    public function user()
     {
         return $this->hasMany(User::class);
     }
