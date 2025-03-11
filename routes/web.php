@@ -7,8 +7,14 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return redirect()->route('files.index');
-});
+    $response = "Welcome to Laravel! Here are two links:<br> ";
+    $response .= '<a href="/login">Login</a> | ';
+    $response .= '<a href="/register">Register</a>';
+
+    return response($response)
+        ->header('Content-Type', 'text/html');
+     
+        });
 
 Route::resource('files', FileController::class);
 
@@ -18,7 +24,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return redirect()->route('files.index');
     })->name('dashboard');
 });
 
