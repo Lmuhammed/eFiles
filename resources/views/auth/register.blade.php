@@ -31,14 +31,6 @@
             </div>
 
             <div class="mt-4">
-                <label for="accountType" class="block text-sm font-medium text-gray-700">Accout type</label>
-                <select id="accountType" name="accountType" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                    <option value="bureauDordre">Order office</option>
-                    <option value="employee">Employee</option>
-                </select>
-            </div>
-
-            <div class="mt-4">
                 <x-label for="password" value="{{ __('Password') }}" />
                 <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
             </div>
