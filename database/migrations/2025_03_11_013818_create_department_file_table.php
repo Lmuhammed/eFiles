@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('files_departments', function (Blueprint $table) {
+        Schema::create('department_file', function (Blueprint $table) {
             $table->id();
             $table->foreignId('file_id')->constrained('files')->onDelete('cascade');
             $table->foreignId('department_id')->constrained('departments')->onDelete('cascade');
-
+            $table->unique(['file_id', 'department_id'], 'unique_file_department');   
             $table->timestamps();
         });
     }

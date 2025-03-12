@@ -46,40 +46,60 @@
             </div>
         </div>
     <hr class="mt-2">
-Department can acsses
+<div>
+    department can acsses
+    <a class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-green-600 transition duration-200" href="{{ route('d_f_get.attach',$file->id) }}">Add</a>
+</div>
  <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-lg">
                 <thead>
                     <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                        <th class="py-3 px-6 text-left">department name</th>
+                        <th class="py-3 px-6 text-left">Department name</th>
+                        <th class="py-3 px-6 text-left">Actions</th>
+
                     </tr>
                 </thead>
                 <tbody class="text-gray-600 text-sm font-light">
+                    @foreach ($departments as $department)
                     <tr class="border-b border-gray-300 hover:bg-gray-100">
-                        <td class="py-3 px-6">document.pdf</td>
+                        <td class="py-3 px-6">{{ $department->department_name  }}</td>
+                        <td>
+                            <div>
+                                <form action="{{ route('d_f.detach', ['fileId' => $file->id, 'departmentId' => $department->id] ) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" onclick="return confirm('Are you sure you want to delete this department?');" class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 transition duration-200">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                       
                     </tr>
+                 
+                     @endforeach
+                    
                 </tbody>
             </table>
 <hr>
     <hr class="mt-2">
-Approvals
- <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-lg">
-                <thead>
-                    <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                        <th class="py-3 px-6 text-left">user_id</th>
-                        <th class="py-3 px-6 text-left">status</th>
-                        <th class="py-3 px-6 text-left">comments</th>
-                    </tr>
-                </thead>
-                <tbody class="text-gray-600 text-sm font-light">
-                    <tr class="border-b border-gray-300 hover:bg-gray-100">
-                        <td class="py-3 px-6">document.pdf</td>
-                        <td class="py-3 px-6">2023-10-01</td>
-                        <td class="py-3 px-6">text text text</td>
-                    </tr>
-                </tbody>
-            </table>
-<hr>
-       
+    @if ($file->requires_approval)
+    Approvals
+    <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-lg">
+        <thead>
+            <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                <th class="py-3 px-6 text-left">user_id</th>
+                <th class="py-3 px-6 text-left">status</th>
+                <th class="py-3 px-6 text-left">comments</th>
+            </tr>
+        </thead>
+        <tbody class="text-gray-600 text-sm font-light">
+            <tr class="border-b border-gray-300 hover:bg-gray-100">
+                <td class="py-3 px-6">document.pdf</td>
+                <td class="py-3 px-6">2023-10-01</td>
+                <td class="py-3 px-6">text text text</td>
+            </tr>
+        </tbody>
+    </table>
+    @endif
+
     </div>
 
 </body>

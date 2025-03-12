@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use App\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -57,7 +58,9 @@ class FileController extends Controller
      */
     public function show(File $file)
     {
-        return view('APP.files.view', compact('file'));
+        $fileDepartments = $file->load('departments');
+        $departments=$fileDepartments->departments;
+        return view('APP.files.view', compact('file','departments'));
     }
 
     /**
@@ -80,6 +83,9 @@ class FileController extends Controller
     public function destroy(File $file)
     {
         $file->delete();
-        return redirect()->route('files.index');
-    }
+    // Find the file by its ID
+    $file = File::findOrFail($fileId);
+
+    // Detach the department from the file
+    $file->departments()->detach($departmentId);    }
 }

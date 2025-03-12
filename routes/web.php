@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\DepartmentFileController;
 use App\Http\Controllers\FileController;
 use Illuminate\Support\Facades\Route;
+
+
 
 
 
@@ -13,10 +16,19 @@ Route::get('/', function () {
 
     return response($response)
         ->header('Content-Type', 'text/html');
-     
-        });
+});
 
-Route::resource('files', FileController::class);
+Route::resource('files', FileController::class)->middleware('auth');
+
+// Routes for DepartmentFileController
+Route::prefix('department_file')->group(function () {
+    Route::get('/attach/{file}/', [DepartmentFileController::class, 'attach_view'])->name('d_f_get.attach');
+    Route::get('/attach', [DepartmentFileController::class, 'attach'])->name('d_f.attach');
+    Route::post('/attach', [DepartmentFileController::class, 'attach'])->name('d_f.attach');
+    Route::delete('/detach/{fileId}/{departmentId}', [DepartmentFileController::class, 'detach'])->name('d_f.detach');
+    // Route::post('/sync', [DepartmentFileController::class, 'sync'])->name('d_f.sync'); maybe later
+
+});
 
 Route::middleware([
     'auth:sanctum',
@@ -26,6 +38,7 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return redirect()->route('files.index');
     })->name('dashboard');
+
 });
 
 

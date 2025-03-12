@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Approval;
+use App\Models\Department;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,5 +26,11 @@ class File extends Model
     {
         return $this->hasMany(Approval::class);
     }
+
+    public function departments()
+    {
+        return $this->belongsToMany(Department::class);
+    }
+
 
 }
