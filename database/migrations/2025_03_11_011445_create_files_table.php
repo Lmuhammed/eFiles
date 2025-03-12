@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('file_path');
             $table->boolean('requires_approval')->default(false);
             $table->datetime('approval_deadline')->nullable();
-            $table->foreignId('uploaded_by')->constrained('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

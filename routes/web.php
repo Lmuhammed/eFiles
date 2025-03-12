@@ -18,7 +18,10 @@ Route::get('/', function () {
         ->header('Content-Type', 'text/html');
 });
 
-Route::resource('files', FileController::class)->middleware('auth');
+Route::resource('files', FileController::class); //->middleware('auth');
+Route::get('sent-files', [FileController::class, 'sent'])->name('files.sent');
+Route::get('received-files', [FileController::class, 'received'])->name('files.received');
+
 
 // Routes for DepartmentFileController
 Route::prefix('department_file')->group(function () {

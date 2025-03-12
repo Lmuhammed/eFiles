@@ -15,6 +15,7 @@ class FileController extends Controller
     public function index()
     {
         $files = File::latest()->get();
+        
         return view('APP.dashbord',compact('files'));
     }
 
@@ -85,7 +86,23 @@ class FileController extends Controller
         $file->delete();
     // Find the file by its ID
     $file = File::findOrFail($fileId);
-
     // Detach the department from the file
-    $file->departments()->detach($departmentId);    }
+    $file->departments()->detach($departmentId);    
+    
+    }
+
+    public function sent()
+    {
+        $files = Auth::user()->files; 
+        return view('APP.files.sent',compact('files'));
+    }
+
+    public function received()
+    {
+        $user = Auth::user();
+        $department = $user->department;
+        $departmentFiles = $department->load('files');
+        $files = $departmentFiles->files; 
+        return view('APP.dashbord',compact('files'));
+    }
 }

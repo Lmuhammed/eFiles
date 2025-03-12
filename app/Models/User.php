@@ -77,7 +77,7 @@ class User extends Authenticatable
 
     public function files()
     {
-        return $this->belongsTo(File::class);
+        return $this->hasMany(File::class);
     }
 
 }
