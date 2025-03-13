@@ -14,7 +14,7 @@ class DepartmentFileController extends Controller
     public function grantAccessView(File $file) 
     {
         $departments=Department::all();
-        return view('APP.files.create_department_file',compact('file','departments'));
+        return view('APP.department_file.create',compact('file','departments'));
     }
 
     public function grantAccess(Request $request, $fileId) //add a relationship of department acsses 
@@ -43,7 +43,7 @@ class DepartmentFileController extends Controller
         public function approveFileView(File $file) 
         {
         $departments=Department::all();
-        return view('APP.files.create_department_file',compact('file','departments'));
+        return view('APP.department_file.create',compact('file','departments'));
         }
 
       public function approveFile(File $file,$departmentId)
