@@ -62,7 +62,9 @@ class FileController extends Controller
     {
         $fileDepartments = $file->load('departments');
         $departments=$fileDepartments->departments;
-        return view('APP.files.view', compact('file','departments'));
+        $fileApprovals = $file->load('approvedDepartments');
+        $approvedDepartments=$fileApprovals->approvedDepartments;
+        return view('APP.files.view', compact('file','departments','approvedDepartments'));
     }
 
     /**

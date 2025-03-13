@@ -8,44 +8,74 @@ use Illuminate\Http\Request;
 
 class DepartmentFileController extends Controller
 {
+        //***************************  Access  *************************** */  
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function attach_view(File $file) 
+
+    public function grantAccessView(File $file) 
     {
         $departments=Department::all();
         return view('APP.files.create_department_file',compact('file','departments'));
     }
 
-    public function attach(Request $request) //Adds a new relationship to the pivot table
+    public function grantAccess(Request $request, $fileId) //add a relationship of department acsses 
     {
         $request->validate([
             'department_ids' => 'required|array', 
             'department_ids.*' => 'exists:departments,id', 
             'file_id' => 'required|exists:files,id',
         ]);
-        
+
         $file = File::findOrFail($request->file_id);
         $file->departments()->attach($request->department_ids);
         return redirect()->route('files.show',$file)->with('success', 'Departments attached successfully.');
-        
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function detach(Request $request,$fileId, $departmentId) //Removes a relationship from the pivot table
+   
+    public function revokeAccess(Request $request,$file, $departmentId) //Removes a  relationship of department acsses 
     {
-            $file = File::findOrFail($fileId);
             $file->departments()->detach($departmentId);
             return redirect()->back()->with('success', 'Departments detached successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    //***************************  Approval  *************************** */  
+    // Mark a file as approved by a department
+        public function approveFileView(File $file) 
+        {
+        $departments=Department::all();
+        return view('APP.files.create_department_file',compact('file','departments'));
+        }
+
+      public function approveFile(File $file,$departmentId)
+      {
+/*           $request->validate([
+              'department_id' => 'required|exists:departments,id',
+          ]);
+                    $file = File::findOrFail($fileId);
+
+ */  
+          $department = Department::findOrFail($departmentId);
+  
+          // Attach the department to the file for approval
+          $file->approvedDepartments()->attach($department->id);
+
+          return redirect()->back()->with('success', 'File approved by departments  successfully.');
+  
+       
+        }
+
+        public function revokeApproval(FILE $file,$departmentId)
+        {
+    
+            $file = File::findOrFail($fileId);
+            $department = Department::findOrFail($departmentId);
+    
+            // Detach the department from the file for approval
+            $file->approvedDepartments()->detach($departmentId);
+            return redirect()->back()->with('success', 'Approval revoked successfully.');
+        }
+
+
 
     /* public function sync() //Synchronizes the relationships, adding new ones and removing those not specified in the array
     {

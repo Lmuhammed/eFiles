@@ -44,13 +44,15 @@
         </div>
     <hr class="mt-2">
 <div>
-    department can acsses
-    <a class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-green-600 transition duration-200" href="{{ route('d_f_get.attach',$file->id) }}">Add</a>
+    Department can acsses
+    <a class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-green-600 transition duration-200" href="{{ route('dp_file_grantAccessView',$file) }}">Add</a>
 </div>
  <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-lg">
                 <thead>
                     <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                         <th class="py-3 px-6 text-left">Department name</th>
+                        <th class="py-3 px-6 text-left">Date acsses granted</th>
+                        <th class="py-3 px-6 text-left">Last Update</th>
                         <th class="py-3 px-6 text-left">Actions</th>
 
                     </tr>
@@ -59,9 +61,11 @@
                     @foreach ($departments as $department)
                     <tr class="border-b border-gray-300 hover:bg-gray-100">
                         <td class="py-3 px-6">{{ $department->department_name  }}</td>
+                        <td class="py-3 px-6">{{ $department->pivot->created_at  }}</td>
+                        <td class="py-3 px-6">{{ $department->pivot->updated_at  }}</td>
                         <td>
                             <div>
-                                <form action="{{ route('d_f.detach', ['fileId' => $file->id, 'departmentId' => $department->id] ) }}" method="POST">
+                                <form action="{{ route('dp_file_revokeAccess', ['file' => $file->id, 'departmentId' => $department->id] ) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" onclick="return confirm('Are you sure you want to delete this department?');" class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 transition duration-200">Delete</button>
@@ -79,19 +83,46 @@
     <hr class="mt-2">
     @if ($file->requires_approval)
     Approvals
+    <div>
+        <form action="{{ route('dp_file_approveFile', ['file' => $file, 'departmentId' => $department->id] ) }}" method="POST">
+            @csrf
+            <button type="submit" onclick="return confirm('Did you agree that you saw this file and you approve it ?');" class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-green-600 transition duration-200">Approve</button>
+        </form>
+    </div>
+
     <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-lg">
         <thead>
             <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                <th class="py-3 px-6 text-left">user_id</th>
-                <th class="py-3 px-6 text-left">status</th>
-                <th class="py-3 px-6 text-left">comments</th>
+                <th class="py-3 px-6 text-left">Department</th>
+                <th class="py-3 px-6 text-left">Status</th>
+                <th class="py-3 px-6 text-left">Notes</th>
+                <th class="py-3 px-6 text-left">Approved at</th>
+                <th class="py-3 px-6 text-left">Last Update</th>
+                <th class="py-3 px-6 text-left">Actions</th>
             </tr>
         </thead>
         <tbody class="text-gray-600 text-sm font-light">
             <tr class="border-b border-gray-300 hover:bg-gray-100">
-                <td class="py-3 px-6">document.pdf</td>
-                <td class="py-3 px-6">2023-10-01</td>
-                <td class="py-3 px-6">text text text</td>
+                @foreach ($approvedDepartments as $approvedFiles)
+                <tr class="border-b border-gray-300 hover:bg-gray-100">
+                    <td class="py-3 px-6">{{ $approvedFiles->department_name  }}</td>
+                    <td class="py-3 px-6">-</td>
+                    <td class="py-3 px-6">-</td>
+                    <td class="py-3 px-6">{{ $approvedFiles->pivot->created_at  }}</td>
+                    <td class="py-3 px-6">{{ $approvedFiles->pivot->updated_at  }}</td>
+                    <td>
+                        <div>
+                            <form action="{{ route('dp_file_revokeApproval', ['file' => $file->id, 'departmentId' => $department->id] ) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" onclick="return confirm('Are you sure you want to delete this department?');" class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 transition duration-200">Delete</button>
+                            </form>
+                        </div>
+                    </td>
+                   
+                </tr>
+             
+                 @endforeach
             </tr>
         </tbody>
     </table>

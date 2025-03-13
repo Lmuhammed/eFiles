@@ -15,9 +15,17 @@ class Department extends Model
     {
         return $this->hasMany(User::class);
     }
+   
     public function files()
     {
-        return $this->belongsToMany(File::class);
+        return $this->belongsToMany(File::class, 'department_file_access')
+                    ->withTimestamps();
+    }
+
+    public function approvedFiles()
+    {
+        return $this->belongsToMany(File::class, 'department_file_approval')
+                    ->withTimestamps();
     }
 
 }

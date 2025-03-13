@@ -22,14 +22,16 @@ class File extends Model
         return $this->belongsTo(User::class,'');
     }
 
-    public function approvals()
-    {
-        return $this->hasMany(Approval::class);
-    }
-
     public function departments()
     {
-        return $this->belongsToMany(Department::class);
+        return $this->belongsToMany(Department::class, 'department_file_access')
+                    ->withTimestamps();
+    }
+
+    public function approvedDepartments()
+    {
+        return $this->belongsToMany(Department::class, 'department_file_approval')
+                    ->withTimestamps();
     }
 
 

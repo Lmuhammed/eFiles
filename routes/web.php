@@ -25,10 +25,13 @@ Route::get('received-files', [FileController::class, 'received'])->name('files.r
 
 // Routes for DepartmentFileController
 Route::prefix('department_file')->group(function () {
-    Route::get('/attach/{file}/', [DepartmentFileController::class, 'attach_view'])->name('d_f_get.attach');
-    Route::get('/attach', [DepartmentFileController::class, 'attach'])->name('d_f.attach');
-    Route::post('/attach', [DepartmentFileController::class, 'attach'])->name('d_f.attach');
-    Route::delete('/detach/{fileId}/{departmentId}', [DepartmentFileController::class, 'detach'])->name('d_f.detach');
+
+    Route::get('/{file}/grant-access', [DepartmentFileController::class, 'grantAccessView'])->name("dp_file_grantAccessView");
+    Route::post('/{file}/grant-access', [DepartmentFileController::class, 'grantAccess'])->name("dp_file_grantAccess");
+    Route::delete('/{file}/{departmentId}/revoke-access', [DepartmentFileController::class, 'revokeAccess'])->name("dp_file_revokeAccess");
+    Route::get('/{file}/approveFile', [DepartmentFileController::class, 'approveFileView'])->name("dp_file_approveFileView");
+    Route::post('/{file}/{departmentId}/approve', [DepartmentFileController::class, 'approveFile'])->name("dp_file_approveFile");
+    Route::delete('/{file}/{departmentId}/revoke-approval', [DepartmentFileController::class, 'revokeApproval'])->name("dp_file_revokeApproval");
     // Route::post('/sync', [DepartmentFileController::class, 'sync'])->name('d_f.sync'); maybe later
 
 });
