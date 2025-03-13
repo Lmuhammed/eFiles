@@ -14,7 +14,7 @@ class File extends Model
         'file_path',
         'requires_approval',
         'approval_deadline',
-        'uploaded_by',
+        'user_id',
     ];
 
     public function user()

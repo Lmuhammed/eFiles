@@ -1,55 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File Upload Form</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        /* Custom styles for the file input */
-        .file-input {
-            display: none;
-        }
-        .file-label {
-            @apply inline-block bg-blue-600 text-white font-semibold py-2 px-4 rounded-md cursor-pointer hover:bg-blue-700 transition duration-200;
-        }
-    </style>
-</head>
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Create file') }}
+        </h2>
+    </x-slot>
+    <div class="w-1/2 mx-auto px-4 mt-5">
+        <h1 class="mt-4 text-2xl text-gray-700 leading-relaxed">
+            Upload a file
+        </h1>
+            <form action="{{ route('files.store') }}" method="post" enctype="multipart/form-data">
+        @csrf
+        <div class="mt-4">
+            <x-label for="title" value="{{ __('File name') }}" />
+            <x-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('name')" required autofocus autocomplete="name" />
+        </div>
 
-    <div class="bg-white p-8 rounded-lg shadow-lg w-96">
-        <body class="bg-gray-100 flex items-center justify-center min-h-screen">
-            @if ($errors->any())
-            <div style="color: red;">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        <h2 class="text-3xl font-bold mb-6 text-center text-gray-800">Upload Files</h2>
-        <form action="{{ route('files.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
+        <div class="mt-4">
 
-            <div class="mb-6">
-                <label for="title" class="block text-sm font-medium text-gray-700 mb-2">File title </label>
-                <input type="text" name="title" id="title">
-            </div>
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload file</label>
+            <input name="file" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file">
+            <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">Supported : PDF, PNG, JPG .</p>
+            
+        </div>
 
-            <div class="mb-6">
-                <label for="file" class="block text-sm font-medium text-gray-700 mb-2">Choose a file</label>
-                <input type="file" id="file" name="file" class="file-input" required>
-                <label for="file" class="file-label" name="file" >Select File</label>
-            </div>
-
-            <div class="mb-6">
-                <label for="description" class="block text-sm font-medium text-gray-700 mb-2">Description</label>
-                <textarea id="description" name="description" rows="4" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500" placeholder="Add a description..."></textarea>
-            </div>
-
-            <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-200">Upload</button>
-        </form>
-    </div>
-
-</body>
-</html>
+        <input class="w-full bg-sky-800 text-black font-bold mt-6 py-2 rounded hover:bg-green-600" type="submit" value="Upload">
+        
+      </form>
+  </div>
+</x-app-layout>

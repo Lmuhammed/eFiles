@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <title>eFile - {{ $file['title'] }}</title>
-</head>
-<body class="bg-gray-100 p-6">
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Dashboard') }}
+        </h2>
+    </x-slot>
 
     <div class="container mx-auto bg-white rounded-lg shadow-lg p-6">
         <h1 class="text-3xl font-bold mb-2 text-center">File Details</h1>
@@ -35,12 +32,12 @@
         <div class="mt-2">
             <h2 class="text-xl font-semibold mb-2">Actions</h2>
             <div class="flex space-x-4">
-                <a href="{{ $file['file_path'] }}" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-200">Open in net tab</a>
+                <a href="{{ $file['file_path'] }}" class="bg-blue-500 text-black py-2 px-4 rounded hover:bg-green-600 transition duration-200">Open in net tab</a>
                 <div>
                     <form action="{{ route('files.destroy', $file) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" onclick="return confirm('Are you sure you want to delete this file?');" class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 transition duration-200">Delete</button>
+                        <button type="submit" onclick="return confirm('Are you sure you want to delete this file?');" class="bg-red-500 text-black py-2 px-4 rounded hover:bg-red-600 transition duration-200">Delete</button>
                     </form>
                 </div>
             </div>
@@ -101,7 +98,4 @@
     @endif
 
     </div>
-
-</body>
-</html>
-
+</x-app-layout>

@@ -32,6 +32,7 @@ class FileController extends Controller
      */
     public function store(Request $request ,File $file)
     {
+
         $data=$request->validate([
 
             'file' => 'required|mimes:jpg,png,pdf,xlx,csv|max:10240',
@@ -42,7 +43,7 @@ class FileController extends Controller
         $data['file'] = time().'.'.$data['file']->extension();  
         $request->file->move(public_path('uploads'), $data['file'] );
         $data['file_path'] = url('uploads/'.$data['file']);
-        $data['uploaded_by'] = Auth::id();
+        $data['user_id'] = Auth::id();
 
         $file::create($data);
 
@@ -103,6 +104,6 @@ class FileController extends Controller
         $department = $user->department;
         $departmentFiles = $department->load('files');
         $files = $departmentFiles->files; 
-        return view('APP.dashbord',compact('files'));
+        return view('APP.files.received',compact('files'));
     }
 }
