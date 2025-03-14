@@ -6,9 +6,6 @@ use App\Http\Controllers\FileController;
 use Illuminate\Support\Facades\Route;
 
 
-
-
-
 Route::get('/', function () {
     $response = "Welcome to Laravel! Here are two links:<br> ";
     $response .= '<a href="/login">Login</a> | ';
@@ -36,16 +33,9 @@ Route::prefix('department_file')->group(function () {
 
 });
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return redirect()->route('files.index');
-    })->name('dashboard');
 
-});
-
+Route::get('/dashboard', function () {
+    return redirect()->route('files.index');
+})->name('dashboard');
 
 Route::resource('departments', DepartmentController::class);

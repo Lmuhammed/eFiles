@@ -16,9 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('profile_photo_path', 2048)->nullable();
             $table->string('password');
-            $table->foreignId('current_team_id')->nullable();
             $table->foreignId('department_id')->constrained('departments')->onDelete('cascade');
             $table->boolean('is_admin')->default(false);
             //$table->enum('accountType', ['admin', 'bureauDordre', 'employee']); 
