@@ -39,3 +39,7 @@ Route::get('/dashboard', function () {
 })->name('dashboard');
 
 Route::resource('departments', DepartmentController::class);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
