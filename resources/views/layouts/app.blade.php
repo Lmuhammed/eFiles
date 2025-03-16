@@ -84,7 +84,11 @@
   
         <main class="py-4 px-4 mt-2 mb-2 border border-dark">
             @if(session('msg-color') && session('message'))
-              <x-seesion-msg message="{{session('message')}}" color="{{session('msg-color')}}"/>
+            <x-seesion-msg message="{{session('message')}}" color="{{session('msg-color')}}"/>
+            @elseif ($errors->any())
+            @foreach ($errors->all() as $error)
+            <x-seesion-msg message{{ $error  }} color="danger" />
+            @endforeach
             @endif
             @yield('content')
         </main>
