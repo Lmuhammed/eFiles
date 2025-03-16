@@ -23,6 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return redirect()->route('files.index')->with('msg-color','success')->with('message','Welcome ');
+        //return view('APP.dashbord');
     }
 }

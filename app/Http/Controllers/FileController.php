@@ -11,6 +11,8 @@ class FileController extends Controller
 {
     /**
      * Display a listing of the resource.
+     ->with('msg-color','success') danger
+            ->with('message','__');
      */
     public function index()
     {
