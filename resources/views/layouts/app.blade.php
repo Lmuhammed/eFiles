@@ -12,6 +12,7 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @yield('styles')
 </head>
 <body>
     <div id="app">
@@ -26,6 +27,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
+                    @auth
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ route('files.index') }}">All Files</a>
@@ -38,9 +40,9 @@
                         <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ route('files.received')  }}">Received Files</a>
                         </li>
-
-
-                    </ul>
+                    </ul> 
+                    @endauth
+                    
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
