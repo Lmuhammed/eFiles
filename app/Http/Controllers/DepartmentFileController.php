@@ -48,12 +48,13 @@ class DepartmentFileController extends Controller
 
       public function approveFile(File $file,$departmentId)
       {
-/*           $request->validate([
-              'department_id' => 'required|exists:departments,id',
-          ]);
-                    $file = File::findOrFail($fileId);
-
- */  
+            /*
+            $request->validate([
+            'department_id' => 'required|exists:departments,id',
+            ]);
+            $file = File::findOrFail($fileId);
+            */  
+            
           $department = Department::findOrFail($departmentId);
   
           // Attach the department to the file for approval
