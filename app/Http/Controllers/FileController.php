@@ -18,7 +18,7 @@ class FileController extends Controller
     {
         $files = File::latest()->get();
         
-        return view('APP.dashbord',compact('files'));
+        return view('APP.files.all',compact('files'));
     }
 
     /**

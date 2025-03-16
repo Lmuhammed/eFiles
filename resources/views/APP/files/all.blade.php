@@ -1,31 +1,42 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('All Files') }}
-        </h2>
-    </x-slot>
+@extends('layouts.app')
+@section('title', "All Files")
+@section('content')
+<div class="text-center h2">
+    List of All Files
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">File Name</th>
+      <th scope="col">Requires approval</th>
+      <th scope="col">Created at</th>
+      <th scope="col">Updated at</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      @if(! ($files->isEmpty()) )
+      @foreach ($files as $file)
+       <td> {{ 1 }} </td>
+       <td> {{ $file['title'] }} </td>
+       <td> {{ $file['requires_approval'] }} </td>
+       <td> {{ $file['created_at'] }} </td>
+       <td> {{ $file['updated_at'] }} </td>
+       <td class="py-3 px-6">
+             <a href="{{ route('files.show',$file) }}" class="btn btn-dark">View</a>
+       </td>
+       @endforeach
+      @else
+        <div class="h2 text-center text-danger">
+          NO Files uploaded yet !
+        <a href="{{ route('files.create') }}" class="btn btn-dark">Add new</a>
+        </div>
+      @endif
+    </tr>
+  </tbody>
+</table>
 
-    <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-lg">
-        <thead>
-            <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                <th class="py-3 px-6 text-left">File Name</th>
-                <th class="py-3 px-6 text-left">Requires approval</th>
-                <th class="py-3 px-6 text-left">Created at</th>
-                <th class="py-3 px-6 text-left">Updated at</th>
-                <th class="py-3 px-6 text-left">Actions</th>
-            </tr>
-        </thead>
-        <tbody class="text-gray-600 text-sm font-light">
-            @foreach($files as $file)
-            <tr class="border-b border-gray-300 hover:bg-gray-100">
-        <td class="py-3 px-6">{{ $file['title'] }}</td>
-        <td class="py-3 px-6">{{ $file['requires_approval'] }}</td>
-        <td class="py-3 px-6">{{ $file['created_at'] }}</td>
-        <td class="py-3 px-6">{{ $file['updated_at'] }}</td>
-        <td class="py-3 px-6">
-            <a href="{{ route('files.show',$file) }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">View</a>
-        </tr>
-         @endforeach
-        </tbody>
-    </table>
-</x-app-layout>
+@endsection
