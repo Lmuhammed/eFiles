@@ -34,7 +34,6 @@ class FileController extends Controller
      */
     public function store(Request $request ,File $file)
     {
-
         $data=$request->validate([
 
             'file' => 'required|mimes:jpg,png,pdf,xlx,csv|max:10240',
@@ -49,7 +48,8 @@ class FileController extends Controller
 
         $file::create($data);
 
-        return redirect()->route('files.index')->with('success', 'File uploaded successfully!');
+        return redirect()->route('files.index')->with('msg-color','success')
+        ->with('message','File uploaded successfully');
         
         /* 
         return back()->with('success', 'File uploaded successfully!')
