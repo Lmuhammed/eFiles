@@ -1,21 +1,33 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
-    <div class="bg-white p-8 rounded-lg shadow-lg w-96">
-        <h2 class="text-3xl font-bold mb-6 text-center text-gray-800">Chose Department that can acsses this File : {{ $file->name }} click to accses (added later) </h2>
-        <form action="{{ route('dp_file_grantAccess', $file->id) }}" method="POST">
-            @csrf
-            <input type="hidden" name="file_id" value="{{ $file->id }}">
-            @foreach($departments as $department)
+@extends('layouts.app')
+@section('title', "eFiles - $file->name")
+@section('content')
+<div class="h2 text-center border border-dark mb-3">
+    {{ "Grant Access to " }}
+    <a href="{{ route('files.show',$file) }}">{{ $file->title }}</a>
+</div>
+<div class="h3">
+    File info
+    </div>
+    <div class="px-2 py-2 mb-3 card">
+        <p><strong>File Name :</strong> <span id="userEmail"> {{ $file['title'] }} </span></p>
+        <p><strong>Upload Date :</strong> <span id="userPhone"> {{ $file['created_at'] }} </span></p>
+        <p><strong>Update Date :</strong> <span id="userLocation">{{ $file['created_at'] }}</span></p>
+        <p><strong>Requires approval :</strong> <span id="userLocation"> {{ $file['requires_approval'] }} </span></p>
+    </div>
+<div class="h3">
+    Grant Access to 
+</div>
+<form action="{{ route('dp_file_grantAccess', $file->id) }}" method="POST">
+    @csrf
+    <input type="hidden" name="file_id" value="{{ $file->id }}">
+    @foreach($departments as $department)
             <div class="mb-2">
-                <input type="checkbox" name="department_ids[]" value="{{ $department->id }}" id="department_{{ $department->id }}">
+                <input class="form-check-input" type="checkbox" name="department_ids[]" value="{{ $department->id }}" id="department_{{ $department->id }}">
                 <label for="department_{{ $department->id }}" class="ml-2">{{ $department->department_name }}</label>
             </div>
-        @endforeach
-            <button type="submit" class="w-full bg-blue-600 text-black font-semibold py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-200">GRANT ACCESS</button>
-        </form>
-    </div>
-</x-app-layout>
+    @endforeach
+
+    <button type="submit" class="btn btn-success">Grant Access</button>
+</form>
+
+@endsection

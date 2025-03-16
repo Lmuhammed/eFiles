@@ -10,7 +10,7 @@
             <div class="h3">
             File info
             </div>
-            <div class="profile-card">
+            <div class="card">
                 <p><strong>File Name :</strong> <span id="userEmail"> {{ $file['title'] }} </span></p>
                 <p><strong>Upload Date :</strong> <span id="userPhone"> {{ $file['created_at'] }} </span></p>
                 <p><strong>Update Date :</strong> <span id="userLocation">{{ $file['created_at'] }}</span></p>
@@ -65,7 +65,6 @@
   </table>
 
 {{-- end Table department can acsses --}}
-
 {{-- Table department can Approve --}}
 @if ($file->requires_approval)
 <div class="h2 text-center border border-dark mb-3">
