@@ -23,7 +23,7 @@
       @foreach ($files as $file)
        <td> {{ 1 }} </td>
        <td> {{ $file['title'] }} </td>
-       <td> {{ $file['requires_approval'] }} </td>
+       <td> {{ $file['requires_approval'] ? "YES" : "NO"  }} </td>
        <td> {{ $file['created_at'] }} </td>
        <td> {{ $file['updated_at'] }} </td>
        <td>
