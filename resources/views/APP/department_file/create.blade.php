@@ -23,7 +23,7 @@
     @foreach($departments as $department)
             <div class="mb-2">
                 <input class="form-check-input" type="checkbox" name="department_ids[]" value="{{ $department->id }}" id="department_{{ $department->id }}">
-                <label for="department_{{ $department->id }}" class="ml-2">{{ $department->department_name }}</label>
+                <label for="department_{{ $department->id }}" class="ml-2">{{ $department->name }}</label>
             </div>
     @endforeach
 

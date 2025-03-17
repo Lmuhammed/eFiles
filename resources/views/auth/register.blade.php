@@ -68,7 +68,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="department_id" id="{{$department->id }}" value="{{ $department->id }}"
                                     <label class="form-check-label" for="{{$department->id}}" >
-                                        {{ $department->department_name }}
+                                        {{ $department->name }}
                                     </label>
                                 </div>
                             @endforeach

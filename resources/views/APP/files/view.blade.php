@@ -56,7 +56,7 @@
         @foreach ($departments as $department)
         <tr>
             <td>{{"1"}}</td>            
-            <td>{{ $department->department_name  }}</td>
+            <td>{{ $department->name  }}</td>
             <td>{{ $department->pivot->created_at  }}</td>
             <td >{{ $department->pivot->updated_at  }}</td>
             <td>

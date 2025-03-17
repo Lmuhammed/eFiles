@@ -18,8 +18,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->foreignId('department_id')->constrained('departments')->onDelete('cascade');
-            $table->boolean('is_admin')->default(false);
-            //$table->enum('accountType', ['admin', 'bureauDordre', 'employee']); 
+            //$table->boolean('is_admin')->default(false);
+            $table->enum('role', ['admin', 'manager', 'employee'])->default('employee');
             $table->boolean('is_active')->default(false);
             $table->rememberToken();
             $table->timestamps();

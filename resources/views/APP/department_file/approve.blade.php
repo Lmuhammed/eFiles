@@ -12,7 +12,7 @@
             @foreach($departments as $department)
             <div class="mb-2">
                 <input type="checkbox" name="department_ids[]" value="{{ $department->id }}" id="department_{{ $department->id }}">
-                <label for="department_{{ $department->id }}" class="ml-2">{{ $department->department_name }}</label>
+                <label for="department_{{ $department->id }}" class="ml-2">{{ $department->name }}</label>
             </div>
         @endforeach
             <button type="submit" class="w-full bg-blue-600 text-black font-semibold py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-200">GRANT ACCESS</button>
