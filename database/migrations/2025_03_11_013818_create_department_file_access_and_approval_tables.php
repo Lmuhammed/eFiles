@@ -16,6 +16,9 @@ return new class extends Migration
             $table->foreignId('department_id')->constrained()->onDelete('cascade');
             $table->foreignId('file_id')->constrained()->onDelete('cascade');
             $table->timestamps();
+            
+            //unique constraint on the combination of department_id and file_id
+            $table->unique(['department_id', 'file_id']);
         });
 
 
