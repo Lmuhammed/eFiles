@@ -37,6 +37,8 @@
     </div>
 </div>
 
+@if ( ! (Auth::user()->role === "employee") )
+
 {{-- Table department can acsses --}}
 <div class="h2 text-center border border-dark mb-3">
     Department can acsses
@@ -74,6 +76,8 @@
   </table>
 
 {{-- end Table department can acsses --}}
+    
+@endif
 
 {{-- Table department can Approve --}}
 @if ($file->requires_approval)
@@ -85,6 +89,8 @@
         <button type="submit" onclick="return confirm('Approve it ?');" class="btn btn-dark">Approve it</button>
     </form>  
 </div>
+@if ( ! (Auth::user()->role === "employee") )
+
 <table class="table">
     <thead class="table-dark">
         <tr>
@@ -120,6 +126,8 @@
     </tbody>
   </table>    
 @endif
-{{-- end Table department can Approve --}}
+@endif
+
+  {{-- end Table department can Approve --}}
 
 @endsection

@@ -29,6 +29,8 @@
                     <!-- Left Side Of Navbar -->
                     @auth
                     <ul class="navbar-nav me-auto">
+                        @if ( ! (Auth::user()->role === "employee") )
+
                         <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ route('files.index') }}">All Files</a>
                         </li>
@@ -36,6 +38,8 @@
                         <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ route('files.sent') }}">Sent Files</a>
                         </li>
+                                                    
+                        @endif
 
                         <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ route('files.received')  }}">Received Files</a>
