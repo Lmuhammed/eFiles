@@ -48,5 +48,4 @@
     </tr>
   </tbody>
 </table>
-
 @endsection

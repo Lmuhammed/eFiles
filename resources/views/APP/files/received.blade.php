@@ -1,34 +1,51 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Received files') }}
-        </h2>
-    </x-slot>
- <div class="container mx-auto">
-        <div class="overflow-x-auto">
-            <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-lg">
-                <thead>
-                    <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                        <th class="py-3 px-6 text-left">File Name</th>
-                        <th class="py-3 px-6 text-left">Requires approval</th>
-                        <th class="py-3 px-6 text-left">Created at</th>
-                        <th class="py-3 px-6 text-left">Updated at</th>
-                        <th class="py-3 px-6 text-left">Actions</th>
-                    </tr>
-                </thead>
-                <tbody class="text-gray-600 text-sm font-light">
-                    @foreach($files as $file)
-                    <tr class="border-b border-gray-300 hover:bg-gray-100">
-                <td class="py-3 px-6">{{ $file['title'] }}</td>
-                <td class="py-3 px-6">{{ $file['requires_approval'] }}</td>
-                <td class="py-3 px-6">{{ $file['created_at'] }}</td>
-                <td class="py-3 px-6">{{ $file['updated_at'] }}</td>
-                <td class="py-3 px-6">
-                    <a href="{{ route('files.show',$file) }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">View</a>
-                </tr>
-                 @endforeach
-                </tbody>
-            </table>
+@extends('layouts.app')
+@section('title', "All Files")
+@section('content')
+<div class="text-center h2">
+    Sent Files
+</div>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">File Name</th>
+      <th scope="col">Requires approval</th>
+      <th scope="col">Created at</th>
+      <th scope="col">Updated at</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      @if(! ($files->isEmpty()) )
+      @foreach ($files as $file)
+       <td> {{ 1 }} </td>
+       <td> {{ $file['title'] }} </td>
+       <td> {{ $file['requires_approval'] }} </td>
+       <td> {{ $file['created_at'] }} </td>
+       <td> {{ $file['updated_at'] }} </td>
+       <td>
+        <div class="row">
+          <div class="col-6">
+            <a href="{{ route('files.show',$file) }}" target="_blank" class="btn btn-dark">View</a>
+          </div>
+          <div class="col-6">
+            <form action="{{ route('files.destroy', $file->id) }}" method="POST">
+              @csrf
+              @method('DELETE')
+              <button type="submit" onclick="return confirm('Are you sure you want to delete this file ?');" class="btn btn-danger">Delete</button>
+          </form>  
+          </div>
         </div>
-    </div>
-</x-app-layout>
+       </td>
+       @endforeach
+      @else
+        <div class="h2 text-center text-danger">
+          NO Files !
+        <a href="{{ route('files.create') }}" class="btn btn-dark">Add new</a>
+        </div>
+      @endif
+    </tr>
+  </tbody>
+</table>
+@endsection
