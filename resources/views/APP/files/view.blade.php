@@ -79,7 +79,11 @@
 @if ($file->requires_approval)
 <div class="h2 text-center border border-dark mb-3">
     Department can Approve
-    <a class="btn btn-dark" target="_blank" href="{{ route('dp_file_approveFileView',$file->id) }}">Approve it</a>
+    {{-- <a class="btn btn-dark" target="_blank" href="{{ route('dp_file_approveFileView',$file->id) }}">Approve it</a> --}}
+    <form action="{{ route('dp_file_approveFile', ['file'=>$file,'departmentId' => Auth::user()->department_id]) }}" method="POST">
+        @csrf
+        <button type="submit" onclick="return confirm('Approve it ?');" class="btn btn-dark">Approve it</button>
+    </form>  
 </div>
 <table class="table">
     <thead class="table-dark">
@@ -97,7 +101,7 @@
         @foreach ($file->approvedDepartments as $approvedD)
         <tr>
             <td>{{ "1"  }}</td>
-            <td>{{ $approvedD->department_name  }}</td>
+            <td>{{ $approvedD->name  }}</td>
             <td>{{ $approvedD->pivot->status  }}</td>
             <td>{{ '-'  }}</td>
             <td>{{ $approvedD->pivot->created_at  }}</td>

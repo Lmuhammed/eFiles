@@ -43,7 +43,7 @@ class DepartmentFileController extends Controller
         public function approveFileView(File $file) 
         {
         $departments=Department::all();
-        return view('APP.department_file.create',compact('file','departments'));
+        return view('APP.department_file.approve',compact('file','departments'));
         }
 
       public function approveFile(File $file,$departmentId)
@@ -54,7 +54,7 @@ class DepartmentFileController extends Controller
             ]);
             $file = File::findOrFail($fileId);
             */  
-            
+        
           $department = Department::findOrFail($departmentId);
   
           // Attach the department to the file for approval
