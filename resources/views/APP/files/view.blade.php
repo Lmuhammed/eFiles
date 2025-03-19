@@ -137,7 +137,7 @@
             <td >{{ $approvedD->pivot->updated_at  }}</td>
             <td>
                 <div>
-                    <form action="{{ route('dp_file_revokeApproval', ['file' => $file->id, 'departmentId' => $department->id] ) }}" method="POST">
+                    <form action="{{ route('dp_file_revokeApproval', ['file' => $file->id, 'departmentId' => $approvedD->id] ) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" onclick="return confirm('Are you sure you want to delete this department?');" class="btn btn-danger">Delete</button>

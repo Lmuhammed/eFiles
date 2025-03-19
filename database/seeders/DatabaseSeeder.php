@@ -6,6 +6,7 @@ use App\Models\Department;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,13 +22,28 @@ class DatabaseSeeder extends Seeder
         
        Department::factory()->create([
             'id' => 1,
-            'department_name' => 'DEV',
+            'name' => 'DEV',
+        ]); 
+
+        Department::factory()->create([
+            'id' => 2,
+            'name' => 'HR',
         ]); 
  
         User::factory()->create([
-            'name' => 'Test User',
+            'name' => 'admin',
             'email' => 'a@a.com',
             'department_id' => 1,
+            'role' => 'admin' ,
+            'password' => Hash::make('123456'),
         ]);
+
+        User::factory()->create([
+            'name' => 'employee',
+            'email' => 'b@b.com',
+            'department_id' => 2,
+            'password' => Hash::make('123456'),
+        ]);
+
     }
 }

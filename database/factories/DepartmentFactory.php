@@ -19,7 +19,7 @@ class DepartmentFactory extends Factory
     public function definition(): array
     {
         return [
-            'department_name' => Str::random(5),    
+            'name' => Str::random(5),    
         ];
     }
 }

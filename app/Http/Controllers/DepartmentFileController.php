@@ -17,7 +17,7 @@ class DepartmentFileController extends Controller
         return view('APP.department_file.create',compact('file','departments'));
     }
 
-    public function grantAccess(Request $request, $fileId) //add a relationship of department acsses 
+    public function grantAccess(Request $request, File $file ) //add a relationship of department acsses 
     {
         $request->validate([
             'department_ids' => 'required|array', 
@@ -25,14 +25,14 @@ class DepartmentFileController extends Controller
             'file_id' => 'required|exists:files,id',
         ]);
 
-        $file = File::findOrFail($request->file_id);
+        //$file = File::findOrFail($request->file_id);
         $file->departments()->attach($request->department_ids);
         return redirect()->route('files.show',$file)->with('success', 'Departments attached successfully.');
 
     }
 
    
-    public function revokeAccess(Request $request,$file, $departmentId) //Removes a  relationship of department acsses 
+    public function revokeAccess(Request $request,File $file, $departmentId) //Removes a  relationship of department acsses 
     {
             $file->departments()->detach($departmentId);
             return redirect()->back()->with('success', 'Departments detached successfully.');
@@ -46,7 +46,7 @@ class DepartmentFileController extends Controller
         return view('APP.department_file.approve',compact('file','departments'));
         }
 
-      public function approveFile(File $file,$departmentId)
+      public function approveFile(File $file,$departmentId )
       {
             /*
             $request->validate([
@@ -55,7 +55,7 @@ class DepartmentFileController extends Controller
             $file = File::findOrFail($fileId);
             */  
         
-          $department = Department::findOrFail($departmentId);
+         $department = Department::findOrFail($departmentId);
   
           // Attach the department to the file for approval
           $file->approvedDepartments()->attach($department->id);
@@ -68,7 +68,6 @@ class DepartmentFileController extends Controller
         public function revokeApproval(FILE $file,$departmentId)
         {
     
-            $file = File::findOrFail($fileId);
             $department = Department::findOrFail($departmentId);
     
             // Detach the department from the file for approval

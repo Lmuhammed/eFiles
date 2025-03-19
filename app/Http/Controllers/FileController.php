@@ -11,9 +11,8 @@ class FileController extends Controller
 {
     /**
      * Display a listing of the resource.
-     ->with('msg-color','success') danger
-            ->with('message','__');
      */
+    
     public function index()
     {
         $files = File::latest()->get();
@@ -36,7 +35,7 @@ class FileController extends Controller
     {
         $data=$request->validate([
 
-            'file' => 'required|mimes:jpg,png,pdf,xlx,csv|max:10240',
+            'file' => 'required|mimes:jpg,png,pdf,xlx,csv|max:10240' /*Max size 10M*/,
             'title' =>'required',
 
         ]);
@@ -88,11 +87,11 @@ class FileController extends Controller
      */
     public function destroy(File $file)
     {
-        $file->delete();
-    // Find the file by its ID
-    $file = File::findOrFail($fileId);
+    
+    $file->delete();
     // Detach the department from the file
-    $file->departments()->detach($departmentId);    
+    return redirect()->route('files.index')->with('msg-color','danger')
+        ->with('message','File deleted successfully');
     
     }
 
