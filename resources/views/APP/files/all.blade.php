@@ -18,10 +18,10 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
       @if(! ($files->isEmpty()) )
       @foreach ($files as $file)
-       <td> {{ 1 }} </td>
+      <tr>
+       <td> {{ ($loop->index) + 1 }} </td>
        <td> {{ $file['title'] }} </td>
        <td> {{ $file['requires_approval'] ? "YES" : "NO"  }} </td>
        <td> {{ $file['created_at'] }} </td>
@@ -40,6 +40,7 @@
           </div>
         </div>
        </td>
+      </tr>
        @endforeach
       @else
         <div class="h2 text-center text-danger">
@@ -47,7 +48,7 @@
         <a href="{{ route('files.create') }}" class="btn btn-dark">Add new</a>
         </div>
       @endif
-    </tr>
+    
   </tbody>
 </table>
 @endif
