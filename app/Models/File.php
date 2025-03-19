@@ -16,12 +16,20 @@ class File extends Model
         'file_path',
         'requires_approval',
         'approval_deadline',
-        'user_id',
+        'correspondence_id',
     ];
 
-    public function user()
+    public function correspondence()
     {
-        return $this->belongsTo(User::class,'');
+        return $this->belongsTo(Correspondence::class);
+    }
+
+    // departments files acsses
+    
+    public function approvedDepartments()
+    {
+        return $this->belongsToMany(Department::class, 'department_file_approval')
+                    ->withTimestamps();
     }
 
     public function departments()
@@ -30,11 +38,6 @@ class File extends Model
                     ->withTimestamps();
     }
 
-    public function approvedDepartments()
-    {
-        return $this->belongsToMany(Department::class, 'department_file_approval')
-                    ->withTimestamps();
-    }
 
 
 }
