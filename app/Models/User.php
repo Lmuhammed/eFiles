@@ -57,7 +57,7 @@ class User extends Authenticatable
 
     public function correspondences()
     {
-        return $this->belongsTo(Correspondence::class);
+        return $this->hasMany(Correspondence::class);
     }
 
     

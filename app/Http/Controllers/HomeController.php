@@ -21,9 +21,10 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    
     public function index()
     {
-        return redirect()->route('files.index')->with('msg-color','success')->with('message','Welcome ');
+        return redirect()->route('correspondences.index')->with('msg-color','success')->with('message','Welcome ');
         //return view('APP.dashbord');
     }
 }

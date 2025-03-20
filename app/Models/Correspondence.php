@@ -9,6 +9,14 @@ use Illuminate\Database\Eloquent\Model;
 class Correspondence extends Model
 {
     
+    
+    protected $fillable = [
+        'code',
+        'source',
+        'destination',
+        'object',
+        'user_id',
+    ];
     public function files()
     {
         return $this->hasMany(File::class);

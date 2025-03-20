@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('source');
             $table->string('destination');
             $table->string('object');
-            $table->enum('type', ['Informational', 'Urgent', 'Routine'])->default('Letter');
-          /*   other type to be added 
+            $table->enum('status', ['Informational', 'Urgent', 'Routine'])->default('Informational');
+            /* other type to be added 
             Follow-Up Message - رسالة متابعة
             Reminder Message - رسالة تذكير
             Feedback Request - طلب ملاحظات
@@ -34,6 +34,7 @@ return new class extends Migration
             Minutes - محضر اجتماع
             Proposal - اقتراح
              */
+            $table->string('note');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             
             $table->timestamps();

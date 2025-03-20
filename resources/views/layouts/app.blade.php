@@ -18,7 +18,7 @@
     <div id="app">
     <nav class="navbar navbar-expand-md bg-dark h5" data-bs-theme="dark">
             <div class="container">
-                <a class="navbar-brand" href="{{ route('files.index') }}">
+                <a class="navbar-brand" href="{{ route('correspondences.index') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
 
@@ -32,17 +32,17 @@
                         @if ( ! (Auth::user()->role === "employee") )
 
                         <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('files.index') }}">All Files</a>
+                        <a class="nav-link" aria-current="page" href="{{ route('correspondences.index') }}">All Correspondences</a>
                         </li>
 
                         <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('files.sent') }}">Sent Files</a>
+                        <a class="nav-link" aria-current="page" href="{{ route('correspondences.sent') }}">Sent Correspondences</a>
                         </li>
                                                     
                         @endif
-
+                        {{-- add active on each link --}}
                         <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('files.received')  }}">Received Files</a>
+                        <a class="nav-link" aria-current="page" href="{{ route('correspondences.received')  }}">Received Correspondences</a>
                         </li>
                     </ul> 
                     @endauth

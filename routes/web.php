@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\CorrespondenceController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DepartmentFileController;
 use App\Http\Controllers\FileController;
 use Illuminate\Support\Facades\Route;
+
 
 
 Route::get('/', function () {
@@ -16,8 +18,8 @@ Route::get('/', function () {
 });
 
 Route::resource('files', FileController::class); //->middleware('auth');
-Route::get('sent-files', [FileController::class, 'sent'])->name('files.sent');
-Route::get('received-files', [FileController::class, 'received'])->name('files.received');
+/* Route::get('sent-files', [FileController::class, 'sent'])->name('files.sent');
+Route::get('received-files', [FileController::class, 'received'])->name('files.received'); */
 
 
 // Routes for DepartmentFileController
@@ -39,6 +41,10 @@ Route::get('/dashboard', function () {
 })->name('dashboard');
 
 Route::resource('departments', DepartmentController::class);
+Route::resource('correspondences', CorrespondenceController::class);
+Route::get('Sent/correspondences', [CorrespondenceController::class, 'sent'])->name('correspondences.sent');
+Route::get('Received/correspondences', [CorrespondenceController::class, 'received'])->name('correspondences.received');
+
 
 Auth::routes();
 
