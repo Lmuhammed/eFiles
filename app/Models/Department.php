@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\Models\File;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Correspondence;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Department extends Model
 {
@@ -14,20 +14,21 @@ class Department extends Model
         'name',
     ];
 
-    public function employee()
+    public function employees()
     {
         return $this->hasMany(User::class);
     }
    
-    public function files()
+    // departments department
+    public function correspondenceAcsses()
     {
-        return $this->belongsToMany(File::class, 'department_file_access')
+        return $this->belongsToMany(Correspondence::class, 'correspondence_department_access')
                     ->withTimestamps();
     }
 
-    public function approvedFiles()
+    public function correspondenceApproved()
     {
-        return $this->belongsToMany(File::class, 'department_file_approval')
+        return $this->belongsToMany(Correspondence::class, 'correspondence_department_approval')
                     ->withTimestamps();
     }
 

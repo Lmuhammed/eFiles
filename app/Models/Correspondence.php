@@ -17,6 +17,8 @@ class Correspondence extends Model
         'object',
         'user_id',
     ];
+
+    
     public function files()
     {
         return $this->hasMany(File::class);
@@ -25,5 +27,21 @@ class Correspondence extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    
     }
+
+     // departments department
+    
+    public function accessDepartments()
+     {
+         return $this->belongsToMany(Department::class, 'correspondence_department_access')
+                     ->withTimestamps();
+     }
+    public function approvedDepartments()
+     {
+         return $this->belongsToMany(Department::class, 'correspondence_department_approval')
+                     ->withTimestamps();
+     }
+ 
+    
 }

@@ -24,19 +24,7 @@ class File extends Model
         return $this->belongsTo(Correspondence::class);
     }
 
-    // departments files acsses
-    
-    public function approvedDepartments()
-    {
-        return $this->belongsToMany(Department::class, 'department_file_approval')
-                    ->withTimestamps();
-    }
-
-    public function departments()
-    {
-        return $this->belongsToMany(Department::class, 'department_file_access')
-                    ->withTimestamps();
-    }
+   
 
 
 
