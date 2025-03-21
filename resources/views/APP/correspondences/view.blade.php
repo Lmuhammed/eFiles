@@ -23,9 +23,44 @@
                     <p><strong>Type :</strong> <span> {{ $correspondence['type']  }} </span></p>
                     <p><strong>Created_at :</strong> <span> {{ $correspondence['created_at']  }} </span></p>
                     <p><strong>Updated at :</strong> <span> {{ $correspondence['updated_at']  }} </span></p>
+                </div>
+                 </div>
+                     </div>
+                    <hr>
+                        <div class="row h5">
+                            <div class="col-6">
+                                Files 
+                            </div>
+                            <div class="col-3">
+                                <form action="{{ route('files.create')}}" method="get">
+                                    @csrf
+                                    <input type="hidden" name="correspondence" value="{{ $correspondence->id }}">
+                                   <button class="btn btn-success">
+                                    Add New
+                                   </button>
+                                </form>
+                            </div>
+                        </div>
+                        
+                    <hr>
 
-                    files
-
+                    @foreach ($files as $file)
+                    <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                              File No {{ ($loop->index)+1 }}
+                            </button>
+                          </h2>
+                          <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <iframe src="{{ $file['file_path'] }}" frameborder="0"></iframe>   
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    @endforeach
+                    
                   {{--   </div>
                     <div class="col-4">
                         <hr>
@@ -46,9 +81,7 @@
                             </div>
                         </div>     
                     </div> --}}
-                    </div>
-                </div>
-              </div>
+                 
         </div>
     </div>
 </div>

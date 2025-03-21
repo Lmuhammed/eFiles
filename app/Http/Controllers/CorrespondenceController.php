@@ -58,7 +58,8 @@ class CorrespondenceController extends Controller
      */
     public function show(Correspondence $correspondence)
     {
-        return view('APP.correspondences.view', compact('correspondence'));
+        $files=$correspondence->files;
+        return view('APP.correspondences.view', compact('correspondence','files'));
     }
 
     /**
