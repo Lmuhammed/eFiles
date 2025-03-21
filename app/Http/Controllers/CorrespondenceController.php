@@ -97,8 +97,8 @@ class CorrespondenceController extends Controller
     {
         $user = Auth::user();
         $department = $user->department;
-        $departmentCorrespondences = $department->load('Correspondences');
-        $Correspondences = $departmentCorrespondences->Correspondences; 
-        return view('APP.Correspondences.received',compact('Correspondences'));
+        $departmentCorrespondences = $department->load('correspondenceAcsses');
+        $correspondences = $departmentCorrespondences->correspondenceAcsses; 
+        return view('APP.correspondences.received',compact('correspondences'));
     }
 }

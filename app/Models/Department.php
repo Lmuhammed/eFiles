@@ -19,7 +19,8 @@ class Department extends Model
         return $this->hasMany(User::class);
     }
    
-    // departments department
+    // departments correspondence
+    
     public function correspondenceAcsses()
     {
         return $this->belongsToMany(Correspondence::class, 'correspondence_department_access')
