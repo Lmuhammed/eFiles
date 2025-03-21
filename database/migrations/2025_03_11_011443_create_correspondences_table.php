@@ -34,7 +34,7 @@ return new class extends Migration
             Minutes - محضر اجتماع
             Proposal - اقتراح
              */
-            $table->string('note');
+            $table->string('note')->nullable();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             
             $table->timestamps();

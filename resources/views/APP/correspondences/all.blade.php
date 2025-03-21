@@ -27,7 +27,7 @@
        <td> {{ $correspondence['code'] }} </td>
        <td> {{ $correspondence['source'] }} </td>
        <td> {{ $correspondence['destination'] }} </td>
-       <td class="bg-danger text-white h5"> {{ $correspondence['status'] }} </td>
+       <td @if ($correspondence['status'] == "Urgent" )  class="bg-danger text-white h5" @endif > {{ $correspondence['status'] }} </td>
        <td> {{ $correspondence['created_at'] }} </td>
        <td> {{ $correspondence['updated_at'] }} </td>
        <td>

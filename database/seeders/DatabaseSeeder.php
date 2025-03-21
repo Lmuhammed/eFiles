@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Correspondence;
 use App\Models\Department;
 use App\Models\File;
 use App\Models\User;
@@ -20,18 +21,15 @@ class DatabaseSeeder extends Seeder
         //Department::factory(10)->create();
         //User::factory(10)->create();
         //Department::factory(10)->create();
-        File::factory(10)->create();
-        
-      /*  Department::factory()->create([
+        //File::factory(10)->create();
+        Department::factory()->create([
             'id' => 1,
             'name' => 'DEV',
         ]); 
-
         Department::factory()->create([
             'id' => 2,
             'name' => 'HR',
         ]); 
- 
         User::factory()->create([
             'name' => 'admin',
             'email' => 'a@a.com',
@@ -39,13 +37,16 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin' ,
             'password' => Hash::make('123456'),
         ]);
-
         User::factory()->create([
             'name' => 'employee',
             'email' => 'b@b.com',
             'department_id' => 2,
             'password' => Hash::make('123456'),
-        ]); */
+        ]);       
+
+        Correspondence::factory(10)->create();
+
+        
 
     }
 }

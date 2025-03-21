@@ -5,10 +5,12 @@ namespace App\Models;
 use App\Models\File;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 class Correspondence extends Model
 {
-    
+    use HasFactory;
     
     protected $fillable = [
         'code',
@@ -16,6 +18,7 @@ class Correspondence extends Model
         'destination',
         'object',
         'user_id',
+
     ];
 
     

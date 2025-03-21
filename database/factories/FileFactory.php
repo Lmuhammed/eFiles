@@ -19,8 +19,8 @@ class FileFactory extends Factory
     {
         return [
             'title' => Str::random(4),
-            //'user_id' => $this->faker->numberBetween(1, 14),
-            'user_id' => 1,
+            //'correspondence_id' => $this->faker->numberBetween(1, 14),
+            'correspondence_id' => 1,
             //change APP_URL in .env for port run by artisan eg 8000,
             'file_path' => url('/uploads/1.pdf'),
         ];
