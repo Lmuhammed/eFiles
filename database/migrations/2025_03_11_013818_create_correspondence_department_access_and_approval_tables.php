@@ -11,21 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('department_file_access', function (Blueprint $table) {
+        Schema::create('correspondence_department_access', function (Blueprint $table) {
             $table->id();
             $table->foreignId('department_id')->constrained()->onDelete('cascade');
-            $table->foreignId('file_id')->constrained()->onDelete('cascade');
+            $table->foreignId('correspondence_id')->constrained()->onDelete('cascade');
             $table->timestamps();
-            
             //unique constraint on the combination of department_id and file_id
-            $table->unique(['department_id', 'file_id']);
+            $table->unique(['correspondence_id','department_id'],'corr_dep_unique');
         });
 
 
-        Schema::create('department_file_approval', function (Blueprint $table) {
+
+        Schema::create('correspondence_department_approval', function (Blueprint $table) {
             $table->id();
+            // status will be added later
             $table->foreignId('department_id')->constrained()->onDelete('cascade');
-            $table->foreignId('file_id')->constrained()->onDelete('cascade');
+            $table->foreignId('correspondence_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
