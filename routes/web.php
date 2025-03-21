@@ -9,12 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    $response = "Welcome to Laravel! Here are two links:<br> ";
-    $response .= '<a href="/login">Login</a> | ';
-    $response .= '<a href="/register">Register</a>';
-
-    return response($response)
-        ->header('Content-Type', 'text/html');
+     return view('home');
 });
 
 Route::resource('files', FileController::class); //->middleware('auth');
