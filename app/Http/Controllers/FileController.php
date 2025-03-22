@@ -24,7 +24,7 @@ class FileController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request)
+    /* public function create(Request $request)
     {
         // change this method to insert new files , by ovverride the route and send the correspondenceas param
 
@@ -40,12 +40,30 @@ class FileController extends Controller
 
        // dd($correspondence);
         return view('APP.files.create', compact('correspondence'));
+    } */
+
+    public function create(Correspondence $correspondence)
+    {
+        // change this method to insert new files , by ovverride the route and send the correspondenceas param
+
+      /*   $data=$request->validate([
+            'correspondence' => 'required|integer|exists:correspondences,id',
+        ]);
+
+        $correspondence=Correspondence::findOrfail($data['correspondence']);
+
+        if($correspondence->user_id !== Auth::user()->id ){ // to make sure the the req didnt Manipulated
+            abort(403); 
+        } */
+
+       // dd($correspondence);
+        return view('APP.files.create', compact('correspondence'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function Nstore(Request $request ,Correspondence $correspondence , File $file)
+    public function store(Request $request ,Correspondence $correspondence , File $file)
     {
         //dd($correspondence);
         $data=$request->validate([

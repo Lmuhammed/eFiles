@@ -12,8 +12,11 @@ Route::get('/', function () {
      return view('home');
 });
 
-Route::resource('files', FileController::class)->except('store'); //->middleware('auth');
-Route::post('files/{correspondence}/',[FileController::class, 'Nstore'])->name('files.Nstore');
+//Route::resource('files', FileController::class)->except('store'); //->middleware('auth');
+
+Route::get('files/create/{correspondence}',[FileController::class, 'create'])->name('files.create');
+Route::post('files/{correspondence}',[FileController::class, 'store'])->name('files.store');
+
 /* Route::get('sent-files', [FileController::class, 'sent'])->name('files.sent');
 Route::get('received-files', [FileController::class, 'received'])->name('files.received'); */
 

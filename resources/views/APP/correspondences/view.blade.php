@@ -32,34 +32,35 @@
                                 Files 
                             </div>
                             <div class="col-3">
-                                <form action="{{ route('files.create')}}" method="get">
+                                <a href="{{ route('files.create',$correspondence) }}" class="btn btn-success">Add New </a>
+                               {{--  <form action="{{ route('files.create')}}" method="get">
                                     @csrf
                                     <input type="hidden" name="correspondence" value="{{ $correspondence->id }}">
                                    <button class="btn btn-success">
                                     Add New
                                    </button>
-                                </form>
+                                </form> --}}
                             </div>
                         </div>
                         
                     <hr>
-
-                    @foreach ($files as $file)
                     <div class="accordion" id="accordionExample">
+                    @foreach ($files as $file)
                         <div class="accordion-item">
-                          <h2 class="accordion-header">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <h2 class="accordion-header" id="heading{{ $loop->index }}">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $loop->index }}" aria-expanded="true" aria-controls="collapse{{ $loop->index }}">
                               File No {{ ($loop->index)+1 }}
                             </button>
                           </h2>
-                          <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                          <div id="collapse{{ $loop->index }}" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <iframe src="{{ $file['file_path'] }}" frameborder="0"></iframe>   
                             </div>
                           </div>
                         </div>
-                      </div>
                     @endforeach
+                </div>
+
                     
                   {{--   </div>
                     <div class="col-4">

@@ -31,7 +31,7 @@
           </div>
         </div>
       </div>
-<form action="{{ route('files.Nstore',$correspondence) }}" method="post" enctype="multipart/form-data">
+<form action="{{ route('files.store',$correspondence) }}" method="post" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-3">
