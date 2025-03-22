@@ -1,10 +1,11 @@
 <?php
 
 use App\Http\Controllers\CorrespondenceController;
+use App\Http\Controllers\CorrespondenceDepartmentController;
 use App\Http\Controllers\DepartmentController;
-use App\Http\Controllers\DepartmentFileController;
 use App\Http\Controllers\FileController;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -16,12 +17,23 @@ Route::get('/', function () {
 
 Route::get('files/create/{correspondence}',[FileController::class, 'create'])->name('files.create');
 Route::post('files/{correspondence}',[FileController::class, 'store'])->name('files.store');
+Route::delete('files/{file}',[FileController::class, 'destroy'])->name('files.destroy');
 
 /* Route::get('sent-files', [FileController::class, 'sent'])->name('files.sent');
 Route::get('received-files', [FileController::class, 'received'])->name('files.received'); */
 
+Route::prefix('dp_cor')->group(function () {
 
-// Routes for DepartmentFileController
+    Route::get('/{correspondence}/grant-access', [CorrespondenceDepartmentController::class, 'grantAccessView'])->name("dp_cor_grantAccessView");
+    Route::post('/{correspondence}/grant-access', [CorrespondenceDepartmentController::class, 'grantAccess'])->name("dp_cor_grantAccess");
+    Route::delete('/{correspondence}/{departmentId}/revoke-access', [CorrespondenceDepartmentController::class, 'revokeAccess'])->name("dp_file_revokeAccess");
+    Route::get('/{correspondence}/approveFile', [CorrespondenceDepartmentController::class, 'approveFileView'])->name("dp_file_approveFileView");
+    Route::post('/{correspondence}/{departmentId}/approve', [CorrespondenceDepartmentController::class, 'approveFile'])->name("dp_file_approveFile");
+    Route::delete('/{correspondence}/{departmentId}/revoke-approval', [CorrespondenceDepartmentController::class, 'revokeApproval'])->name("dp_file_revokeApproval");
+    // Route::post('/sync', [DepartmentFileController::class, 'sync'])->name('d_f.sync'); maybe later
+
+});
+/* Routes for DepartmentFileController
 Route::prefix('department_file')->group(function () {
 
     Route::get('/{file}/grant-access', [DepartmentFileController::class, 'grantAccessView'])->name("dp_file_grantAccessView");
@@ -33,7 +45,7 @@ Route::prefix('department_file')->group(function () {
     // Route::post('/sync', [DepartmentFileController::class, 'sync'])->name('d_f.sync'); maybe later
 
 });
-
+*/
 
 Route::get('/dashboard', function () {
     return redirect()->route('files.index');

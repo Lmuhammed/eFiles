@@ -33,13 +33,6 @@
                             </div>
                             <div class="col-3">
                                 <a href="{{ route('files.create',$correspondence) }}" class="btn btn-success">Add New </a>
-                               {{--  <form action="{{ route('files.create')}}" method="get">
-                                    @csrf
-                                    <input type="hidden" name="correspondence" value="{{ $correspondence->id }}">
-                                   <button class="btn btn-success">
-                                    Add New
-                                   </button>
-                                </form> --}}
                             </div>
                         </div>
                         
@@ -50,42 +43,77 @@
                             <h2 class="accordion-header" id="heading{{ $loop->index }}">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $loop->index }}" aria-expanded="true" aria-controls="collapse{{ $loop->index }}">
                               File No {{ ($loop->index)+1 }}
+                             
                             </button>
                           </h2>
-                          <div id="collapse{{ $loop->index }}" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                          <div id="collapse{{ $loop->index }}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <iframe src="{{ $file['file_path'] }}" frameborder="0"></iframe>   
                             </div>
                           </div>
+                           {{-- delete file --}}
+                           <div class="col-4">
+                            <form action="{{ route('files.destroy', $file) }}" method="POST">
+                              @csrf
+                              @method('DELETE')
+                              <button type="submit" onclick="return confirm('Are you sure you want to delete this file ?');" class="btn btn-danger">Delete</button>
+                            </form>  
                         </div>
+                        {{-- preview --}}
+                        <div class="col-8">
+                            <a target="_blank" href="{{ $file['file_path'] }}" class="btn btn-dark">Open in new tab</a>
+                        </div>
+                        </div>
+                        {{-- delete file --}}
+
                     @endforeach
                 </div>
-
-                    
-                  {{--   </div>
-                    <div class="col-4">
-                        <hr>
-                        <p><strong>Preview :</strong></p>
-                        <iframe src="{{ $file['file_path'] }}" frameborder="0"></iframe>   
-                        <hr>
-                        <div class="row">
-                            <p><strong>Actions :</strong></p>
-                            <div class="col-8">
-                                <a target="_blank" href="{{ $file['file_path'] }}" class="btn btn-dark">Open in new tab</a>
-                            </div>
-                            <div class="col-4">
-                              <form action="{{ route('files.destroy', $file->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" onclick="return confirm('Are you sure you want to delete this file ?');" class="btn btn-danger">Delete</button>
-                            </form>  
-                            </div>
-                        </div>     
-                    </div> --}}
-                 
         </div>
+    </div>
+    
+</div>
+
+{{-- Table department can acsses --}}
+<div class="row">
+    <div class="col-4">
+        <div class="h2 text-center border border-dark mb-3">
+            Department can acsses
+        </div>
+    </div>
+    
+    <div class="col-4">
+        <a class="btn btn-dark" target="_blank" href="{{ route('dp_cor_grantAccessView',$correspondence) }}">Add</a>
     </div>
 </div>
 
-
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Department name</th>
+        <th scope="col">Date acsses granted</th>
+        <th scope="col">Last Update</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+        @foreach ($correspondence->accessDepartments as $department)
+        <tr>
+            <td>{{"1"}}</td>            
+            <td>{{ $department->name  }}</td>
+            <td>{{ $department->pivot->created_at  }}</td>
+            <td >{{ $department->pivot->updated_at  }}</td>
+            <td>
+                <div>
+                    <form action="{{ route('dp_file_revokeAccess', ['correspondence' => $correspondence, 'departmentId' => $department->id] ) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" onclick="return confirm('Are you sure you want to delete this department?');" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
+  </table>
 @endsection

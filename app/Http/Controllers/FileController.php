@@ -14,12 +14,12 @@ class FileController extends Controller
      * Display a listing of the resource.
      */
     
-    public function index()
+  /*   public function index()
     {
         $files = File::latest()->get();
         
         return view('APP.files.all',compact('files'));
-    }
+    } */
 
     /**
      * Show the form for creating a new resource.
@@ -92,14 +92,14 @@ class FileController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(File $file)
+    /* public function show(File $file)
     {
         $fileDepartments = $file->load('departments');
         $departments=$fileDepartments->departments;
         $fileApprovals = $file->load('approvedDepartments');
         $approvedDepartments=$fileApprovals->approvedDepartments;
         return view('APP.files.view', compact('file','departments','approvedDepartments'));
-    }
+    } */
 
     /**
      * Show the form for editing the specified resource.
@@ -121,25 +121,12 @@ class FileController extends Controller
     public function destroy(File $file)
     {
     
+    $correspondence=$file->correspondence;
     $file->delete();
-    // Detach the department from the file
-    return redirect()->route('files.index')->with('msg-color','danger')
+    
+    return redirect()->route('correspondences.show',$correspondence)->with('msg-color','danger')
         ->with('message','File deleted successfully');
     
-    }
-
-    public function sent()
-    {
-        $files = Auth::user()->files; 
-        return view('APP.files.sent',compact('files'));
-    }
-
-    public function received()
-    {
-        $user = Auth::user();
-        $department = $user->department;
-        $departmentFiles = $department->load('files');
-        $files = $departmentFiles->files; 
-        return view('APP.files.received',compact('files'));
+    
     }
 }

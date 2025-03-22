@@ -2,40 +2,42 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Correspondence;
 use App\Models\Department;
-use App\Models\File;
 use Illuminate\Http\Request;
 
-class DepartmentFileController extends Controller
+class CorrespondenceDepartmentController extends Controller
 {
         //***************************  Access  *************************** */  
 
 
-    public function grantAccessView(File $file) 
+    public function grantAccessView(Correspondence $correspondence) 
     {
         $departments=Department::all();
-        return view('APP.department_file.create',compact('file','departments'));
+        return view('APP.correspondence_department.create',compact('correspondence','departments'));
     }
 
-    public function grantAccess(Request $request, File $file ) //add a relationship of department acsses 
+    public function grantAccess(Request $request, Correspondence $correspondence ) //add a relationship of department acsses 
     {
         $request->validate([
             'department_ids' => 'required|array', 
             'department_ids.*' => 'exists:departments,id', 
-            'file_id' => 'required|exists:files,id',
         ]);
-
+//        'file_id' => 'required|exists:files,id',
         //$file = File::findOrFail($request->file_id);
-        $file->departments()->attach($request->department_ids);
-        return redirect()->route('files.show',$file)->with('success', 'Departments attached successfully.');
+        $correspondence->accessDepartments()->attach($request->department_ids);
+        return redirect()->route('correspondences.show',$correspondence)
+        ->with('msg-color','success')
+        ->with('message','Access granted successfully');
 
     }
 
    
-    public function revokeAccess(Request $request,File $file, $departmentId) //Removes a  relationship of department acsses 
+    public function revokeAccess(Request $request,Correspondence $correspondence, $departmentId) //Removes a  relationship of department acsses 
     {
-            $file->departments()->detach($departmentId);
-            return redirect()->back()->with('success', 'Departments detached successfully.');
+            $correspondence->accessDepartments()->detach($departmentId);
+            return redirect()->back()->with('msg-color','success')
+            ->with('message','Access revoked successfully');
     }
 
     //***************************  Approval  *************************** */  
