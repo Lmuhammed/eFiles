@@ -10,53 +10,10 @@ use Illuminate\Support\Facades\Auth;
 
 class FileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     
-  /*   public function index()
-    {
-        $files = File::latest()->get();
-        
-        return view('APP.files.all',compact('files'));
-    } */
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    /* public function create(Request $request)
-    {
-        // change this method to insert new files , by ovverride the route and send the correspondenceas param
-
-        $data=$request->validate([
-            'correspondence' => 'required|integer|exists:correspondences,id',
-        ]);
-
-        $correspondence=Correspondence::findOrfail($data['correspondence']);
-
-        if($correspondence->user_id !== Auth::user()->id ){ // to make sure the the req didnt Manipulated
-            abort(403); 
-        }
-
-       // dd($correspondence);
-        return view('APP.files.create', compact('correspondence'));
-    } */
 
     public function create(Correspondence $correspondence)
     {
-        // change this method to insert new files , by ovverride the route and send the correspondenceas param
-
-      /*   $data=$request->validate([
-            'correspondence' => 'required|integer|exists:correspondences,id',
-        ]);
-
-        $correspondence=Correspondence::findOrfail($data['correspondence']);
-
-        if($correspondence->user_id !== Auth::user()->id ){ // to make sure the the req didnt Manipulated
-            abort(403); 
-        } */
-
-       // dd($correspondence);
         return view('APP.files.create', compact('correspondence'));
     }
 
@@ -65,7 +22,6 @@ class FileController extends Controller
      */
     public function store(Request $request ,Correspondence $correspondence , File $file)
     {
-        //dd($correspondence);
         $data=$request->validate([
 
             'file' => 'required|mimes:jpg,png,pdf,xlx,csv|max:10240' /*Max size 10M*/,
@@ -82,24 +38,9 @@ class FileController extends Controller
 
         return redirect()->route('correspondences.show',$correspondence)->with('msg-color','success')
         ->with('message','File uploaded successfully');
-        
-        /* 
-        return back()->with('success', 'File uploaded successfully!')
-        ->with('file', $data['file']); 
-        */
+     
     }
 
-    /**
-     * Display the specified resource.
-     */
-    /* public function show(File $file)
-    {
-        $fileDepartments = $file->load('departments');
-        $departments=$fileDepartments->departments;
-        $fileApprovals = $file->load('approvedDepartments');
-        $approvedDepartments=$fileApprovals->approvedDepartments;
-        return view('APP.files.view', compact('file','departments','approvedDepartments'));
-    } */
 
     /**
      * Show the form for editing the specified resource.
