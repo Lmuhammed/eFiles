@@ -26,10 +26,10 @@ Route::prefix('dp_cor')->group(function () {
 
     Route::get('/{correspondence}/grant-access', [CorrespondenceDepartmentController::class, 'grantAccessView'])->name("dp_cor_grantAccessView");
     Route::post('/{correspondence}/grant-access', [CorrespondenceDepartmentController::class, 'grantAccess'])->name("dp_cor_grantAccess");
-    Route::delete('/{correspondence}/{departmentId}/revoke-access', [CorrespondenceDepartmentController::class, 'revokeAccess'])->name("dp_file_revokeAccess");
-    Route::get('/{correspondence}/approveFile', [CorrespondenceDepartmentController::class, 'approveFileView'])->name("dp_file_approveFileView");
-    Route::post('/{correspondence}/{departmentId}/approve', [CorrespondenceDepartmentController::class, 'approveFile'])->name("dp_file_approveFile");
-    Route::delete('/{correspondence}/{departmentId}/revoke-approval', [CorrespondenceDepartmentController::class, 'revokeApproval'])->name("dp_file_revokeApproval");
+    Route::delete('/{correspondence}/{departmentId}/revoke-access', [CorrespondenceDepartmentController::class, 'revokeAccess'])->name("dp_cor_revokeAccess");
+    Route::get('/{correspondence}/approveFile', [CorrespondenceDepartmentController::class, 'approveFileView'])->name("dp_cor_approveFileView");
+    Route::post('/{correspondence}//approve', [CorrespondenceDepartmentController::class, 'approveFile'])->name("dp_cor_approveFileView");
+    Route::delete('/{correspondence}/{departmentId}/revoke-approval', [CorrespondenceDepartmentController::class, 'revokeApproval'])->name("dp_cor_revokeApproval");
     // Route::post('/sync', [DepartmentFileController::class, 'sync'])->name('d_f.sync'); maybe later
 
 });

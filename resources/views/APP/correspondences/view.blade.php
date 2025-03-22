@@ -105,7 +105,7 @@
             <td >{{ $department->pivot->updated_at  }}</td>
             <td>
                 <div>
-                    <form action="{{ route('dp_file_revokeAccess', ['correspondence' => $correspondence, 'departmentId' => $department->id] ) }}" method="POST">
+                    <form action="{{ route('dp_cor_revokeAccess', ['correspondence' => $correspondence , 'departmentId' => $department->id]) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" onclick="return confirm('Are you sure you want to delete this department?');" class="btn btn-danger">Delete</button>
@@ -116,4 +116,58 @@
         @endforeach
     </tbody>
   </table>
+
+{{-- Table department can Approve --}}
+<div class="row">
+    <div class="col-4">
+        <div class="h2 text-center border border-dark mb-3">
+            Department can Approve
+        </div>
+    </div>
+    
+    <div class="col-4">
+        <form action="{{ route('dp_cor_approveFileView', $correspondence ) }}" method="POST">
+            @csrf
+            <button type="submit" onclick="return confirm('Approve it ?');" class="btn btn-dark">Approve it</button>
+        </form>  
+    </div>
+</div>
+
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+        <th scope="col">#</th>
+        <th scope="col">Department</th>
+        <th scope="col">Status</th>
+        <th scope="col">Notes</th>
+        <th scope="col">Approved at</th>
+        <th scope="col">Last Update</th>    
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+        @foreach ($correspondence->approvedDepartments as $approvedD)
+        <tr>
+            <td>{{ "1"  }}</td>
+            <td>{{ $approvedD->name  }}</td>
+            <td>{{ $approvedD->pivot->status  }}</td>
+            <td>{{ '-'  }}</td>
+            <td>{{ $approvedD->pivot->created_at  }}</td>
+            <td >{{ $approvedD->pivot->updated_at  }}</td>
+            <td>
+                <div>
+                    <form action="{{ route('dp_cor_revokeApproval', ['correspondence' => $correspondence, 'departmentId' => $approvedD->id] ) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" onclick="return confirm('Are you sure you want to delete this department?');" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
+  </table>    
+
+{{-- end Table department can Approve --}}
+
 @endsection

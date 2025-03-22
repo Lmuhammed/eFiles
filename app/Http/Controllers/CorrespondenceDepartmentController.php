@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Correspondence;
 use App\Models\Department;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CorrespondenceDepartmentController extends Controller
 {
@@ -33,7 +34,7 @@ class CorrespondenceDepartmentController extends Controller
     }
 
    
-    public function revokeAccess(Request $request,Correspondence $correspondence, $departmentId) //Removes a  relationship of department acsses 
+    public function revokeAccess(Correspondence $correspondence, $departmentId) //Removes a  relationship of department acsses 
     {
             $correspondence->accessDepartments()->detach($departmentId);
             return redirect()->back()->with('msg-color','success')
@@ -45,36 +46,30 @@ class CorrespondenceDepartmentController extends Controller
         public function approveFileView(File $file) 
         {
         $departments=Department::all();
-        return view('APP.department_file.approve',compact('file','departments'));
+        return view('APP.correspondence_department.approve',compact('file','departments'));
         }
 
-      public function approveFile(File $file,$departmentId )
-      {
-            /*
-            $request->validate([
-            'department_id' => 'required|exists:departments,id',
-            ]);
-            $file = File::findOrFail($fileId);
-            */  
-        
-         $department = Department::findOrFail($departmentId);
-  
+      public function approveFile(Correspondence $correspondence )
+      {  
           // Attach the department to the file for approval
-          $file->approvedDepartments()->attach($department->id);
+          $correspondence->approvedDepartments()->attach(Auth::user()->department_id);
 
-          return redirect()->back()->with('success', 'File approved by departments  successfully.');
+          return redirect()->back()
+          ->with('msg-color','success')
+          ->with('message','correspondence approved  successfully');
   
        
         }
 
-        public function revokeApproval(FILE $file,$departmentId)
+        public function revokeApproval(Correspondence $correspondence,$departmentId)
         {
     
             $department = Department::findOrFail($departmentId);
     
-            // Detach the department from the file for approval
-            $file->approvedDepartments()->detach($departmentId);
-            return redirect()->back()->with('success', 'Approval revoked successfully.');
+            $correspondence->approvedDepartments()->detach($departmentId);
+            return redirect()->back()
+            ->with('msg-color','success')
+            ->with('message','Approval revoked successfully');
         }
 
 
