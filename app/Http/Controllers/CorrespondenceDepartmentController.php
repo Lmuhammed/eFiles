@@ -9,13 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class CorrespondenceDepartmentController extends Controller
 {
-        //***************************  Access  *************************** */  
-
-
+    //***************************  Access  *************************** */  
     public function grantAccessView(Correspondence $correspondence) 
     {
         $departments=Department::all();
-        return view('APP.correspondence_department.create',compact('correspondence','departments'));
+        return view('APP.correspondences.department.create',compact('correspondence','departments'));
     }
 
     public function grantAccess(Request $request, Correspondence $correspondence ) //add a relationship of department acsses 
@@ -24,8 +22,6 @@ class CorrespondenceDepartmentController extends Controller
             'department_ids' => 'required|array', 
             'department_ids.*' => 'exists:departments,id', 
         ]);
-//        'file_id' => 'required|exists:files,id',
-        //$file = File::findOrFail($request->file_id);
         $correspondence->accessDepartments()->attach($request->department_ids);
         return redirect()->route('correspondences.show',$correspondence)
         ->with('msg-color','success')
@@ -34,26 +30,19 @@ class CorrespondenceDepartmentController extends Controller
     }
 
    
-    public function revokeAccess(Correspondence $correspondence, $departmentId) //Removes a  relationship of department acsses 
-    {
+      public function revokeAccess(Correspondence $correspondence, $departmentId) //Removes a  relationship of department acsses 
+      {
             $correspondence->accessDepartments()->detach($departmentId);
             return redirect()->back()->with('msg-color','success')
             ->with('message','Access revoked successfully');
-    }
-
-    //***************************  Approval  *************************** */  
-    // Mark a file as approved by a department
-        public function approveFileView(File $file) 
-        {
-        $departments=Department::all();
-        return view('APP.correspondence_department.approve',compact('file','departments'));
         }
 
-      public function approveFile(Correspondence $correspondence )
+      //***************************  Approval  *************************** */  
+      
+      public function approve(Correspondence $correspondence )
       {  
           // Attach the department to the file for approval
           $correspondence->approvedDepartments()->attach(Auth::user()->department_id);
-
           return redirect()->back()
           ->with('msg-color','success')
           ->with('message','correspondence approved  successfully');
@@ -63,9 +52,7 @@ class CorrespondenceDepartmentController extends Controller
 
         public function revokeApproval(Correspondence $correspondence,$departmentId)
         {
-    
             $department = Department::findOrFail($departmentId);
-    
             $correspondence->approvedDepartments()->detach($departmentId);
             return redirect()->back()
             ->with('msg-color','success')

@@ -33,7 +33,7 @@
        <td>
         <div class="row">
           <div class="col-6">
-            <a href="{{ route('correspondences.show',$correspondence) }}" target="_blank" class="btn btn-dark">View</a>
+            <a href="{{ route('correspondences.show',$correspondence) }}" class="btn btn-dark">View</a>
           </div>
           <div class="col-6">
             <form action="{{ route('correspondences.destroy', $correspondence) }}" method="POST">

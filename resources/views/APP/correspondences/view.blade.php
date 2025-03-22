@@ -126,7 +126,7 @@
     </div>
     
     <div class="col-4">
-        <form action="{{ route('dp_cor_approveFileView', $correspondence ) }}" method="POST">
+        <form action="{{ route('dp_cor_approve', $correspondence ) }}" method="POST">
             @csrf
             <button type="submit" onclick="return confirm('Approve it ?');" class="btn btn-dark">Approve it</button>
         </form>  

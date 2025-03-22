@@ -34,10 +34,8 @@ Route::prefix('dp_cor')->group(function () {
     ->name("dp_cor_grantAccess");
     Route::delete('/{correspondence}/{departmentId}/revoke-access', [CorrespondenceDepartmentController::class, 'revokeAccess'])
     ->name("dp_cor_revokeAccess");
-    Route::get('/{correspondence}/approveFile', [CorrespondenceDepartmentController::class, 'approveFileView'])
-    ->name("dp_cor_approveFileView");
-    Route::post('/{correspondence}//approve', [CorrespondenceDepartmentController::class, 'approveFile'])
-    ->name("dp_cor_approveFileView");
+    Route::post('/{correspondence}/approve', [CorrespondenceDepartmentController::class, 'approve'])
+    ->name("dp_cor_approve");
     Route::delete('/{correspondence}/{departmentId}/revoke-approval', [CorrespondenceDepartmentController::class, 'revokeApproval'])
     ->name("dp_cor_revokeApproval");
     // Route::post('/sync', [DepartmentFileController::class, 'sync'])->name('d_f.sync'); maybe later

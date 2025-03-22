@@ -102,4 +102,6 @@ class CorrespondenceController extends Controller
         $correspondences = $departmentCorrespondences->correspondenceAcsses; 
         return view('APP.correspondences.received',compact('correspondences'));
     }
+
+    
 }
