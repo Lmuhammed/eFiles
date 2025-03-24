@@ -43,6 +43,7 @@
           </div>
         </div>
        </td>
+      </tr>
        @endforeach
       @else
         <div class="h2 text-center text-danger">
@@ -50,7 +51,8 @@
         <a href="{{ route('correspondences.create') }}" class="btn btn-dark">Add new</a>
         </div>
       @endif
-    </tr>
   </tbody>
 </table>
+{{-- Pagination --}}
+{{ $correspondences->links() }}
 @endsection

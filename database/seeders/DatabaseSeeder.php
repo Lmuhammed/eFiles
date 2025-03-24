@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'b@b.com',
             'department_id' => 2,
             'password' => Hash::make('123456'),
-        ]);       
+        ]);   
 
         Correspondence::factory(10)->create();
 

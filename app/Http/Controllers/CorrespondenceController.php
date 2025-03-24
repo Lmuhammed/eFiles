@@ -15,7 +15,7 @@ class CorrespondenceController extends Controller
     
     public function index()
     {
-        $correspondences = Correspondence::latest()->get();
+        $correspondences = Correspondence::latest()->paginate(7);
         return view('APP.correspondences.all',compact('correspondences'));
     }
 
@@ -90,7 +90,7 @@ class CorrespondenceController extends Controller
 
     public function sent()
     {
-        $correspondences = Auth::user()->correspondences; 
+        $correspondences = Auth::user()->correspondences()->paginate(7);
         return view('APP.correspondences.sent',compact('correspondences'));
     }
 
@@ -99,7 +99,7 @@ class CorrespondenceController extends Controller
         $user = Auth::user();
         $department = $user->department;
         $departmentCorrespondences = $department->load('correspondenceAcsses');
-        $correspondences = $departmentCorrespondences->correspondenceAcsses; 
+        $correspondences = $departmentCorrespondences->correspondenceAcsses()->paginate(7);
         return view('APP.correspondences.received',compact('correspondences'));
     }
 

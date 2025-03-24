@@ -17,8 +17,8 @@ class IsAdminManagerMiddleware
     {
     
         $user = auth()->user();
-        //if (!$user || $user->role !== 'admin') {
-        if ( $user->role !== 'admin' || $user->role !== 'manager') {
+        //if ( $user->role !== 'admin' || $user->role !== 'manager') {
+        if ( $user->role == 'employee' ) {
         abort(403);
         }
         return $next($request);

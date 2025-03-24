@@ -1,10 +1,10 @@
 @extends('layouts.app')
-@section('title', "All Files")
+@section('title', "All Correspondences")
 @section('content')
 @if ( ! (Auth::user()->role === "employee") )
     
 <div class="text-center h2">
-    List of All Files
+    List of All Correspondences
 </div>
 <table class="table table-hover">
   <thead>
@@ -55,6 +55,8 @@
     
   </tbody>
 </table>
-@endif
 
+{{-- Pagination --}}
+{{ $correspondences->links() }}
+@endif
 @endsection

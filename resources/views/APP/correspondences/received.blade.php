@@ -19,12 +19,12 @@
   <tbody>
       @if(! ($correspondences->isEmpty()) )
       @foreach ($correspondences as $correspondence)
-      <tr>
-        <td> {{ ($loop->index) + 1 }} </td>
+        <tr>
+          <td> {{ ($loop->index) + 1 }} </td>
         <td> {{ $correspondence['code'] }} </td>
         <td> {{ $correspondence['source'] }} </td>
         <td> {{ $correspondence['destination'] }} </td>
-        <td class="bg-danger text-white h5"> {{ $correspondence['status'] }} </td>
+        <td > {{ $correspondence['status'] }} </td>
         <td> {{ $correspondence['created_at'] }} </td>
         <td> {{ $correspondence['updated_at'] }} </td>
         <td>
@@ -41,7 +41,7 @@
            </div>
          </div>
         </td>
-       </tr>
+        </tr>
       @endforeach
       @else
       <div class="h2 text-center text-danger">
@@ -51,4 +51,6 @@
       @endif
   </tbody>
 </table>
+{{-- Pagination --}}
+{{ $correspondences->links() }}
 @endsection
