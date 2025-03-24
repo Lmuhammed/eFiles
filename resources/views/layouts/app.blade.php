@@ -24,7 +24,7 @@
             ]"/>
         @else
         <x-navbar :links="[
-            ['title' => 'Received Correspondences', 'url' => route('correspondences.received')],
+            ['title' => 'Received Correspondences', 'url' => route('correspondences.received') ,'routeName' =>'correspondences.received'],
             ]"/>
         @endif
         

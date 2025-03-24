@@ -11,11 +11,15 @@ use Illuminate\Support\Facades\Route;
 // auth
 Auth::routes();
 
-Route::get('/', function () { return view('home'); });
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::middleware(['guest'])->group(function () {
+    Route::get('/', function () { return view('home'); });
 
+});
+
+Route::middleware(['auth'])->group(function () {
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 // departments
-//Route::resource('departments', DepartmentController::class);
 Route::get('/departments', [DepartmentController::class, 'getAllDepartments'])->name('departments.index');
 Route::get('/departments/create', [DepartmentController::class, 'create'])->name('departments.create');
 Route::post('/departments', [DepartmentController::class, 'store'])->name('departments.store');
@@ -30,7 +34,6 @@ Route::post('files/{correspondence}',[FileController::class, 'store'])->name('fi
 Route::delete('files/{file}',[FileController::class, 'destroy'])->name('files.destroy');
 
 // correspondences
-//Route::resource('correspondences', CorrespondenceController::class);
 Route::get('/correspondences', [CorrespondenceController::class, 'index'])->name('correspondences.index');
 Route::get('/correspondences/create', [CorrespondenceController::class, 'create'])->name('correspondences.create');
 Route::post('/correspondences', [CorrespondenceController::class, 'store'])->name('correspondences.store');
@@ -43,16 +46,11 @@ Route::get('Sent/correspondences', [CorrespondenceController::class, 'sent'])->n
 Route::get('Received/correspondences', [CorrespondenceController::class, 'received'])->name('correspondences.received');
 
 // departments correspondences
-Route::prefix('dp_cor')->group(function () {
-    Route::get('/{correspondence}/grant-access', [CorrespondenceDepartmentController::class, 'grantAccessView'])
-    ->name("dp_cor_grantAccessView");
-    Route::post('/{correspondence}/grant-access', [CorrespondenceDepartmentController::class, 'grantAccess'])
-    ->name("dp_cor_grantAccess");
-    Route::delete('/{correspondence}/{departmentId}/revoke-access', [CorrespondenceDepartmentController::class, 'revokeAccess'])
-    ->name("dp_cor_revokeAccess");
-    Route::post('/{correspondence}/approve', [CorrespondenceDepartmentController::class, 'approve'])
-    ->name("dp_cor_approve");
-    Route::delete('/{correspondence}/{departmentId}/revoke-approval', [CorrespondenceDepartmentController::class, 'revokeApproval'])
-    ->name("dp_cor_revokeApproval");
+Route::get('/dp_cor/{correspondence}/grant-access', [CorrespondenceDepartmentController::class, 'grantAccessView'])->name("dp_cor_grantAccessView");
+Route::post('/dp_cor/{correspondence}/grant-access', [CorrespondenceDepartmentController::class, 'grantAccess'])->name("dp_cor_grantAccess");
+Route::delete('/dp_cor/{correspondence}/{departmentId}/revoke-access', [CorrespondenceDepartmentController::class, 'revokeAccess'])->name("dp_cor_revokeAccess");
+Route::post('/dp_cor/{correspondence}/approve', [CorrespondenceDepartmentController::class, 'approve'])->name("dp_cor_approve");
+Route::delete('/dp_cor/{correspondence}/{departmentId}/revoke-approval', [CorrespondenceDepartmentController::class, 'revokeApproval'])->name("dp_cor_revokeApproval");
+// Route::post('/sync', [DepartmentFileController::class, 'sync'])->name('d_f.sync'); maybe later
+
 });
-    // Route::post('/sync', [DepartmentFileController::class, 'sync'])->name('d_f.sync'); maybe later
