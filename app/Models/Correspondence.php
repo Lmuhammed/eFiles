@@ -17,6 +17,7 @@ class Correspondence extends Model
         'source',
         'destination',
         'object',
+        'note',
         'user_id',
 
     ];
