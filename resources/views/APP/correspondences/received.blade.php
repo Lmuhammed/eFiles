@@ -44,10 +44,10 @@
        </tr>
       @endforeach
       @else
-        <div class="h2 text-center text-danger">
-          NO Files !
-        <a href="{{ route('files.create') }}" class="btn btn-dark">Add new</a>
-        </div>
+      <div class="h2 text-center text-danger">
+        NO Correspondences !
+        <a href="{{ route('correspondences.create') }}" class="btn btn-dark">Add new</a>
+      </div>
       @endif
   </tbody>
 </table>

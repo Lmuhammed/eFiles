@@ -27,7 +27,7 @@
        <td> {{ $correspondence['code'] }} </td>
        <td> {{ $correspondence['source'] }} </td>
        <td> {{ $correspondence['destination'] }} </td>
-       <td @if ($correspondence['status'] == "Urgent" )  class="bg-danger text-white h5" @endif > {{ $correspondence['status'] }} </td>
+       <td> {{ $correspondence['status'] }} </td>
        <td> {{ $correspondence['created_at'] }} </td>
        <td> {{ $correspondence['updated_at'] }} </td>
        <td>
@@ -48,8 +48,8 @@
        @endforeach
       @else
         <div class="h2 text-center text-danger">
-          NO Files uploaded yet !
-        <a href="{{ route('correspondences.create') }}" class="btn btn-dark">Add new</a>
+          NO Correspondences !
+          <a href="{{ route('correspondences.create') }}" class="btn btn-dark">Add new</a>
         </div>
       @endif
     

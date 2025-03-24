@@ -20,7 +20,6 @@
         <x-navbar :links="[
             ['title' => 'All Correspondences', 'url' => route('correspondences.index') ,'routeName' =>'correspondences.index'],
             ['title' => 'Sent Correspondences', 'url' => route('correspondences.sent') ,'routeName' =>'correspondences.sent'],
-            ['title' => 'Received Correspondences', 'url' => route('correspondences.received') ,'routeName' =>'correspondences.received'],
             ]"/>
         @else
         <x-navbar :links="[
