@@ -37,6 +37,7 @@ Route::post('files/{correspondence}',[FileController::class, 'store'])->name('fi
 Route::delete('files/{file}',[FileController::class, 'destroy'])->name('files.destroy');
 
 // correspondences
+Route::get('/correspondences', [CorrespondenceController::class, 'index'])->name('correspondences.index');
 Route::get('/correspondences/create', [CorrespondenceController::class, 'create'])->name('correspondences.create');
 Route::post('/correspondences', [CorrespondenceController::class, 'store'])->name('correspondences.store');
 Route::get('/correspondences/Sent', [CorrespondenceController::class, 'sent'])->name('correspondences.sent');//Get sent correspondences
@@ -46,7 +47,6 @@ Route::delete('/correspondences/{correspondence}', [CorrespondenceController::cl
 
 });
 
-Route::get('/correspondences', [CorrespondenceController::class, 'index'])->name('correspondences.index');
 Route::get('/correspondences/Received', [CorrespondenceController::class, 'received'])->name('correspondences.received');//Get Received correspondences
 Route::get('/correspondences/{correspondence}', [CorrespondenceController::class, 'show'])->name('correspondences.show');
 Route::post('/dp_cor/{correspondence}/approve', [CorrespondenceDepartmentController::class, 'approve'])->name("dp_cor_approve");

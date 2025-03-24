@@ -17,10 +17,12 @@ class IsAdminManagerMiddleware
     {
     
         $user = auth()->user();
-        //if ( $user->role !== 'admin' || $user->role !== 'manager') {
-        if ( $user->role == 'employee' ) {
-        abort(403);
-        }
+        //if ( $user->role == 'employee' ) {
+        if ( $user->role !== 'employee' )  {
+        //abort(403);
         return $next($request);
+        }
+        return redirect()->route('correspondences.received');
+
     }
 }
