@@ -7,11 +7,23 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     {{-- <title>{{ config('app.name', 'Laravel') }}</title> --}}
     <title>@yield('title', 'eFiles')</title> <!-- Default title -->
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <style>
+        .vertical-navbar {
+            height: 100vh; 
+            padding-top: 0; 
+            margin-top: 0; 
+        }
+        .nav-link {
+            transition: background-color 0.3s, color 0.3s; 
+        }
+        .nav-link:hover {
+            background-color: #fa7c7c; 
+            color: white; 
+        }
+
+    </style>
     @yield('styles')
 </head>
 <body>
@@ -28,7 +40,7 @@
         @endif
         
         
-        <main class="py-4 px-4 mt-2 mb-2 border border-dark">
+        <main>
             @if(session('msg-color') && session('message'))
             <x-seesion-msg message="{{session('message')}}" color="{{session('msg-color')}}"/>
             @elseif ($errors->any())
@@ -36,8 +48,13 @@
             <x-seesion-msg message{{ $error  }} color="danger" />
             @endforeach
             @endif
-            @yield('content')
-        </main>
-    </div>
+        <div class="container-fluid">            
+            @include('layouts.sideBar')
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-4">
+                @yield('content')
+            </main>
+        </div>
+        
+
 </body>
 </html>
