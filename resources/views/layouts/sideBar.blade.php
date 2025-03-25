@@ -8,7 +8,7 @@
                         <a class="nav-link text-dark" aria-current="page" href="{{ route('departments.index') }}">Departmens</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="#">Users</a>
+                        <a class="nav-link text-dark" href="{{ route('users.index') }}">Users</a>
                     </li>
                 </ul>
             </div>

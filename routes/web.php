@@ -5,8 +5,10 @@ use App\Http\Controllers\CorrespondenceDepartmentController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\HomeController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\IsAdminManagerMiddleware;
+use Illuminate\Support\Facades\Route;
+
 
 
 // auth
@@ -44,6 +46,14 @@ Route::get('/correspondences/{correspondence}/edit', [CorrespondenceController::
 Route::put('/correspondences/{correspondence}', [CorrespondenceController::class, 'update'])->name('correspondences.update');
 Route::delete('/correspondences/{correspondence}', [CorrespondenceController::class, 'destroy'])->name('correspondences.destroy');
 
+//Users
+Route::get('users', [UserController::class, 'all'])->name('users.index');
+Route::get('users/create', [UserController::class, 'create'])->name('users.create');
+Route::post('users', [UserController::class, 'store'])->name('users.store');
+Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
+Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+
 });
 
 Route::get('/correspondences/Received', [CorrespondenceController::class, 'received'])->name('correspondences.received');//Get Received correspondences
@@ -51,5 +61,7 @@ Route::get('/correspondences/{correspondence}', [CorrespondenceController::class
 Route::post('/dp_cor/{correspondence}/approve', [CorrespondenceDepartmentController::class, 'approve'])->name("dp_cor_approve");
 Route::delete('/dp_cor/{correspondence}/{departmentId}/revoke-approval', [CorrespondenceDepartmentController::class, 'revokeApproval'])->name("dp_cor_revokeApproval");
 // Route::post('/sync', [DepartmentFileController::class, 'sync'])->name('d_f.sync'); maybe later
+
+
 
 });
