@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', "All Departments")
+@section('title', "All Users")
 @section('content')    
 <div class="h2">
     All Users

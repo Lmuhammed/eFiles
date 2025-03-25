@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', "Create New user")
+@section('title', "Update New user")
 @section('content')
 <div class="text-center h2">
  Update a User informations
