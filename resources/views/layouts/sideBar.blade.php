@@ -5,10 +5,10 @@
                     All operations
                     <hr>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" aria-current="page" href="#">Users</a>
+                        <a class="nav-link text-dark" aria-current="page" href="{{ route('departments.index') }}">Departmens</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="#">Departmens</a>
+                        <a class="nav-link text-dark" href="#">Users</a>
                     </li>
                 </ul>
             </div>

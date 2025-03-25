@@ -19,13 +19,12 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::middleware([IsAdminManagerMiddleware::class])->group(function () {
 // departments
-Route::get('/departments', [DepartmentController::class, 'getAllDepartments'])->name('departments.index');
+Route::get('/departments', [DepartmentController::class, 'index'])->name('departments.index');
 Route::get('/departments/create', [DepartmentController::class, 'create'])->name('departments.create');
 Route::post('/departments', [DepartmentController::class, 'store'])->name('departments.store');
-Route::get('/departments/{id}', [DepartmentController::class, 'show'])->name('departments.show');
-Route::get('/departments/{id}/edit', [DepartmentController::class, 'edit'])->name('departments.edit');
-Route::put('/departments/{id}', [DepartmentController::class, 'update'])->name('departments.update');
-Route::delete('/departments/{id}', [DepartmentController::class, 'destroy'])->name('departments.destroy');
+Route::get('/departments/{department}/edit', [DepartmentController::class, 'edit'])->name('departments.edit');
+Route::put('/departments/{department}', [DepartmentController::class, 'update'])->name('departments.update');
+Route::delete('/departments/{department}', [DepartmentController::class, 'destroy'])->name('departments.destroy');
 
 // departments correspondences
 Route::get('/dp_cor/{correspondence}/grant-access', [CorrespondenceDepartmentController::class, 'grantAccessView'])->name("dp_cor_grantAccessView");
