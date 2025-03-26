@@ -1,8 +1,8 @@
 @extends('layouts.app')
-@section('title', "Update Department")
+@section('title', "Modifier les informations du département")
 @section('content')
 <div class="text-center h2">
- Edit Department : {{ $department->name }}
+Modifier les informations du département : {{ $department->name }}
 </div>
 <form action="{{ route('departments.update',$department) }}" method="post" >
         @csrf
@@ -10,13 +10,14 @@
         <div class="row">
 
         <div class="mb-3 col-6">
-                <label for="name" class="form-label">Departments name</label>
+                <label for="name" class="form-label">Nom du département</label>
                 <input type="text" class="form-control border border-4" id="name" name="name" value="{{ $department->name }}">
+        
+        <div class="d-grid gap-2 mt-2 mb-2">
+                <button type="submit" class="btn btn-success btn-lg">Mise à jour</button>
         </div>
-
         </div>
-            <button type="submit" class="btn btn-secondary btn-lg">Update</button>
+        </div>
             
  </form>
-    
 @endsection

@@ -27,7 +27,7 @@ public function store(Request $request)
 
     Department::create($data);
     return redirect()->route('departments.index')->with('msg-color', 'success')
-        ->with('message', 'Departments added successfully');
+        ->with('message', 'Départements ajoutés avec succès');
 }
 
 public function edit(Department $department)
@@ -43,14 +43,14 @@ public function update(Request $request, Department $department)
 
     $department->update($data);
     return redirect()->route('departments.index')->with('msg-color', 'success')
-        ->with('message', 'Departments updated successfully');
+        ->with('message', 'Départements mis à jour avec succès');
 }
 
 public function destroy(Department $department)
 {
     $department->delete();
     return redirect()->route('departments.index')->with('msg-color', 'danger')
-        ->with('message', 'Departments deleted successfully');
+        ->with('message', 'Départements supprimés avec succès');
 }
 
 }

@@ -25,7 +25,7 @@ class CorrespondenceDepartmentController extends Controller
         $correspondence->accessDepartments()->attach($request->department_ids);
         return redirect()->route('correspondences.show',$correspondence)
         ->with('msg-color','success')
-        ->with('message','Access granted successfully');
+        ->with('message','Accès accordé avec succès');
 
     }
 
@@ -34,7 +34,7 @@ class CorrespondenceDepartmentController extends Controller
       {
             $correspondence->accessDepartments()->detach($departmentId);
             return redirect()->back()->with('msg-color','success')
-            ->with('message','Access revoked successfully');
+            ->with('message','Accès révoqué avec succès');
         }
 
       //***************************  Approval  *************************** */  
@@ -45,7 +45,7 @@ class CorrespondenceDepartmentController extends Controller
           $correspondence->approvedDepartments()->attach(Auth::user()->department_id);
           return redirect()->back()
           ->with('msg-color','success')
-          ->with('message','correspondence approved  successfully');
+          ->with('message','courriers approuvée avec succès');
   
        
         }
@@ -56,7 +56,7 @@ class CorrespondenceDepartmentController extends Controller
             $correspondence->approvedDepartments()->detach($departmentId);
             return redirect()->back()
             ->with('msg-color','success')
-            ->with('message','Approval revoked successfully');
+            ->with('message','Approbation révoquée avec succès');
         }
 
 

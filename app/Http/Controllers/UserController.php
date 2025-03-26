@@ -34,7 +34,7 @@ class UserController extends Controller
         $data['password'] = bcrypt($data['password']);
         User::create($data);
         return redirect()->route('users.index')->with('msg-color', 'success')
-            ->with('message', 'User added successfully');
+            ->with('message', 'Utilisateur ajouté avec succès');
     }
 
     public function edit(User $user)
@@ -61,14 +61,14 @@ class UserController extends Controller
 
         $user->update($data);
         return redirect()->route('users.index')->with('msg-color', 'success')
-            ->with('message', 'User updated successfully');
+            ->with('message', 'Utilisateur mis à jour avec succès');
     }
 
     public function destroy(User $user)
     {
         $user->delete();
         return redirect()->route('users.index')->with('msg-color', 'danger')
-            ->with('message', 'User deleted successfully');
+            ->with('message', 'Utilisateur supprimé avec succès');
     }
 
 

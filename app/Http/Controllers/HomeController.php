@@ -24,6 +24,8 @@ class HomeController extends Controller
     
     public function index()
     {
-        return redirect()->route('correspondences.index')->with('msg-color','success')->with('message','Welcome ');
+        return redirect()->route('correspondences.index')
+        ->with('msg-color','success')
+        ->with('message','Bienvenue ');
     }
 }

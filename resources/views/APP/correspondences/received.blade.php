@@ -2,7 +2,7 @@
 @section('title', "All Correspondences")
 @section('content')
 <div class="text-center h2">
-    Received  Correspondences
+  Courrier entrant
 </div>
 <table class="table table-hover">
   <thead>
@@ -11,8 +11,8 @@
     <th scope="col">Source</th>
     <th scope="col">Destination</th>
     <th scope="col" >Status</th>
-    <th scope="col">Created at</th>
-    <th scope="col">Updated at</th>
+    <th scope="col">Créé à</th>
+    <th scope="col">Mis à jour à</th>
     <th scope="col">Actions</th>
   </tr>
   </thead>
@@ -30,23 +30,24 @@
         <td>
          <div class="row">
            <div class="col-6">
-             <a href="{{ route('correspondences.show',$correspondence) }}" target="_blank" class="btn btn-dark">View</a>
+             <a href="{{ route('correspondences.show',$correspondence) }}" target="_blank" class="btn btn-dark">Voir</a>
            </div>
+           @can('isAdmin')
            <div class="col-6">
-             <form action="{{ route('correspondences.destroy', $correspondence) }}" method="POST">
-               @csrf
-               @method('DELETE')
-               <button type="submit" onclick="return confirm('Are you sure you want to delete this file ?');" class="btn btn-danger">Delete</button>
-           </form>  
-           </div>
+            <form action="{{ route('correspondences.destroy', $correspondence) }}" method="POST">
+              @csrf
+              @method('DELETE')
+              <button type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce courrier ?');" class="btn btn-danger">Supprimer</button>
+          </form>  
+          </div>  
+           @endcan
          </div>
         </td>
         </tr>
       @endforeach
       @else
       <div class="h2 text-center text-danger">
-        NO Correspondences !
-        <a href="{{ route('correspondences.create') }}" class="btn btn-dark">Add new</a>
+        AUCUNE courrier !
       </div>
       @endif
   </tbody>

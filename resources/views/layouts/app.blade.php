@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    {{-- <title>{{ config('app.name', 'Laravel') }}</title> --}}
-    <title>@yield('title', 'eFiles')</title> <!-- Default title -->
+    <title>@yield('title', 'eFiles')</title> 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <style>
@@ -23,6 +22,12 @@
             color: white; 
         }
 
+        input:hover {
+            border-color: #000000; /* Change border color on hover */
+            background-color: #d3d3d3; /* Change background color on hover */
+        }
+
+
     </style>
     @yield('styles')
 </head>
@@ -30,12 +35,12 @@
     <div id="app">
         @if ( Auth::check() && Auth::user()->role !== 'employee')
         <x-navbar :links="[
-            ['title' => 'All Correspondences', 'url' => route('correspondences.index') ,'routeName' =>'correspondences.index'],
-            ['title' => 'Sent Correspondences', 'url' => route('correspondences.sent') ,'routeName' =>'correspondences.sent'],
+            ['title' => 'Toute les courrier', 'url' => route('correspondences.index') ,'routeName' =>'correspondences.index'],
+            ['title' => 'Courrier envoyés', 'url' => route('correspondences.sent') ,'routeName' =>'correspondences.sent'],
             ]"/>
         @else
         <x-navbar :links="[
-            ['title' => 'Received Correspondences', 'url' => route('correspondences.received') ,'routeName' =>'correspondences.received'],
+            ['title' => 'Courrier reçus', 'url' => route('correspondences.received') ,'routeName' =>'correspondences.received'],
             ]"/>
         @endif
         

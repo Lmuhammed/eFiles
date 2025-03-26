@@ -1,19 +1,19 @@
 @extends('layouts.app')
-@section('title', "All Departments")
+@section('title', "Tous les départements")
 @section('content')    
 <div class="h2">
-    All Departments
+  Tous les départements
 <div>
-    <a href="{{ route('departments.create') }}">Create New</a>
+    <a href="{{ route('departments.create') }}">Créer nouveau</a>
 </div>
 </div>
 <table class="table table-hover">
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Department name</th>
-      <th scope="col">Created at</th>
-      <th scope="col">Updated at</th>
+      <th scope="col">Nom du département</th>
+      <th scope="col">Créé à</th>
+      <th scope="col">Mis à jour à</th>
       <th scope="col">Actions</th>
     </tr>
   </thead>
@@ -27,20 +27,19 @@
        <td>
         <div class="row">
           <div class="col-6">
-            <a href="{{ route('departments.edit',$department) }}" class="btn btn-dark">Edit</a>
+            <a href="{{ route('departments.edit',$department) }}" class="btn btn-dark">Modifier</a>
           </div>
           <div class="col-6">
             <form action="{{ route('departments.destroy', $department) }}" method="POST">
               @csrf
               @method('DELETE')
-              <button type="submit" onclick="return confirm('Are you sure you want to delete this Departments ?');" class="btn btn-danger">Delete</button>
+              <button type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce département ?');" class="btn btn-danger">Supprimer</button>
           </form>  
           </div>
         </div>
        </td>
       </tr>
        @endforeach
-    
   </tbody>
 </table>
 {{-- Pagination --}}

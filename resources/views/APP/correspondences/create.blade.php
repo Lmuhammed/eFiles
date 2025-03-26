@@ -2,7 +2,7 @@
 @section('title', "Create Correspondence")
 @section('content')
 <div class="text-center h2">
- Create New Correspondence
+    Créer une nouvelle courrier
 </div>
 <form action="{{ route('correspondences.store') }}" method="post" enctype="multipart/form-data">
         @csrf
@@ -31,29 +31,29 @@
         </div>
         
         <div class="mb-4">
-            <label for="object" class="form-label">Object</label>
+            <label for="object" class="form-label">Objet</label>
             <input type="text" class="form-control border border-4" id="object" name="object">
         </div>
         
         <div class="row mb-3">
             <div class="col-6">
                 <select name="status" id="status" class="form-select border border-4" aria-label="Default select example">
-                    <option selected >Select Status</option>
+                    <option selected >Sélectionner statut</option>
                     @forelse ($statuses as $status)
                         <option value="{{ $status }}">{{ $status }}</option>
                     @empty
-                        <div class="text-center text-danger h5"> No Status available , <a href="http://">insert here</a>  </div>
+                        <div class="text-center text-danger h5"> AUCUNE Status </div>
                     @endforelse
                 </select>
             </div>
             
             <div class="col-6">
                 <select name="type" id="type" class="form-select border border-4" aria-label="Default select example">
-                    <option selected >Select Type</option>
+                    <option selected >Sélectionner le type</option>
                     @forelse ($types as $type)
                         <option value="{{ $type }}">{{ $type }}</option>
                     @empty
-                        <div class="text-center text-danger h5"> No Status types , <a href="http://">insert here</a>  </div>
+                        <div class="text-center text-danger h5"> AUCUNE types </div>
                     @endforelse
                 </select>
             </div>
@@ -61,12 +61,13 @@
         </div>
 
         <div class="mb-3">
-            <label for="note" class="form-label">Note</label>
+            <label for="note" class="form-label">Remarque</label>
             <textarea class="form-control border border-4" id="note" rows="3" name="note" ></textarea>
         </div>
 
-            <button type="submit" class="btn btn-secondary btn-lg">Create</button>
-            
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-success btn-lg">Créer</button>
+        </div>            
  </form>
     
 @endsection

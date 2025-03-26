@@ -50,7 +50,7 @@ class CorrespondenceController extends Controller
         $Correspondence::create($data);
 
         return redirect()->route('correspondences.index')->with('msg-color','success')
-        ->with('message','Correspondence uploaded successfully');
+        ->with('message','courriers Envoyé avec succès');
     }
 
     /**
@@ -84,7 +84,7 @@ class CorrespondenceController extends Controller
     
     $Correspondence->delete();
     return redirect()->route('correspondences.index')->with('msg-color','danger')
-        ->with('message','Correspondence deleted successfully');
+        ->with('message','courriers supprimée avec succès');
     
     }
 

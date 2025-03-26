@@ -1,16 +1,16 @@
 @extends('layouts.app')
-@section('title', "Update New user")
+@section('title', "Mettre à jour les informations")
 @section('content')
 <div class="text-center h2">
- Update a User informations
+Mettre à jour les informations
 </div>
 <form action="{{ route('users.update',$user) }}" method="post" >
         @csrf
         @method('PUT')
         <div class="row">
-                <div class="col-6 h3">
+                <div class="col-6">
                         <div class="mb-3">
-                                <label for="name" class="form-label">Name</label>
+                                <label for="name" class="form-label">Nom</label>
                                 <input type="text" class="form-control border border-4" id="name" name="name" value="{{ $user->name }}">
                         </div>
                         <div class="mb-3">
@@ -19,14 +19,14 @@
                         </div>  
                         
                         <div class="mb-3">
-                                <label for="password" class="form-label">Setup New password</label>
+                                <label for="password" class="form-label">Configurer nouveau mot de passe</label>
                                 <input type="password" class="form-control border border-4" id="password" name="password">
                         </div>
                         <div>
-                                Current Departments <p> {{ $user->department->name }}</p>
+                                Département actuel <p> {{ $user->department->name }}</p>
                         </div>
                         <div class="mb-3">
-                                <label for="department_id" class="form-label">Chose departments</label>
+                                <label for="department_id" class="form-label">Attribuer nouveau département</label>
                                 @foreach($departments as $department)
                                 @if ($user->department->id !== $department->id)
                                 <div class="form-check">
@@ -42,7 +42,9 @@
                 </div>
                
         </div>
-            <button type="submit" class="btn btn-secondary btn-lg">Create</button>
+        <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-secondary btn-lg">Modifier</button>
+        </div>
             
  </form>
     

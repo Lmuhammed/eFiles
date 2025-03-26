@@ -37,7 +37,7 @@ class FileController extends Controller
         $file::create($data);
 
         return redirect()->route('correspondences.show',$correspondence)->with('msg-color','success')
-        ->with('message','File uploaded successfully');
+        ->with('message','Fichier téléchargé avec succès');
      
     }
 
@@ -66,7 +66,7 @@ class FileController extends Controller
     $file->delete();
     
     return redirect()->route('correspondences.show',$correspondence)->with('msg-color','danger')
-        ->with('message','File deleted successfully');
+        ->with('message','Fichier supprimé avec succès');
     
     
     }
