@@ -19,7 +19,7 @@
 <div class="h3">
     Accorder l'accès 
 </div>
-<form action="{{ route('dp_cor_grantAccess', $correspondence ) }}" method="POST">
+<form action="{{ route('dp_cor_approve', $correspondence ) }}" method="POST">
     @csrf
 <div class="row my-2">
     @foreach($departments as $department)
@@ -28,10 +28,22 @@
                         <label for="department_{{ $department->id }}" class="ml-2 border border-dark px-1 py-1">{{ $department->name }}</label>
                     </div>
     @endforeach
-</div>
+</div>  
 
-        <div class="mb-3 h3">
-            <label for="note" class="form-label">Message vers les départements</label>
+        <div class="col-md-6">
+                @foreach($departments as $department)
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="department_id" id="{{$department->id }}" value="{{ $department->id }}"
+                    <label class="form-check-label" for="{{$department->id}}" >
+                        {{ $department->name }}
+                        
+                    </label>
+                </div>
+            @endforeach
+        </div>
+        
+        <div class="mb-3">
+            <label for="note" class="form-label">Message</label>
             <textarea class="form-control" id="note" rows="3" name="note" ></textarea>
         </div>
 

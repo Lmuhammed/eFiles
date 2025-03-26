@@ -20,8 +20,6 @@ return new class extends Migration
             $table->unique(['correspondence_id','department_id'],'corr_dep_unique');
         });
 
-
-
         Schema::create('correspondence_department_approval', function (Blueprint $table) {
             $table->id();
             // status will be added later

@@ -62,7 +62,7 @@ class CorrespondenceController extends Controller
              
             $file->move(public_path('uploads'), $fileName);
   
-            $files[] = ['file_path' => $fileName,'title' => 'facture' , 'correspondence_id' => $correspondenceId];
+            $files[] = ['name' => $fileName, 'correspondence_id' => $correspondenceId];
         }
   
         foreach ($files as $fileData) {

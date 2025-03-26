@@ -42,10 +42,26 @@ class CorrespondenceDepartmentController extends Controller
 
       //***************************  Approval  *************************** */  
       
+      public function approveView(Correspondence $correspondence )
+      {  
+        
+          return view('APP.correspondences.department.approval');
+  
+      }
+
       public function approve(Correspondence $correspondence )
       {  
-          // Attach the department to the file for approval
-          $correspondence->approvedDepartments()->attach(Auth::user()->department_id);
+
+        $request->validate([
+            'department_ids' => 'required|array', 
+            'department_ids.*' => 'exists:departments,id', 
+            'note' => 'required',
+        ]);
+        // Attach the department to the file for approval
+          //$correspondence->approvedDepartments()->attach(Auth::user()->department_id);
+          $correspondence->approvedDepartments()->attach(Auth::user()->department_id, [
+            'message' => 'Your custom message here',
+        ]);
           return redirect()->back()
           ->with('msg-color','success')
           ->with('message','courriers approuvée avec succès');

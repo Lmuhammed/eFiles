@@ -104,10 +104,11 @@
     @endcan
     @can('isEmployee')
     <div class="col-4">
-        <form action="{{ route('dp_cor_approve', $correspondence ) }}" method="POST">
+        {{-- <form action="{{ route('dp_cor_approve', $correspondence ) }}" method="POST">
             @csrf
             <button type="submit" onclick="return confirm('Approve it ?');" class="btn btn-success">Approuvez-le</button>
-        </form> 
+        </form>  --}}
+        <a href="{{ route('approveView') }}" class="btn btn-success">Approuvez-le</a>
     </div>
     @endcan
 </div>
