@@ -25,6 +25,8 @@ return new class extends Migration
         Schema::create('correspondence_department_approval', function (Blueprint $table) {
             $table->id();
             // status will be added later
+            $table->enum('status', ['Accepté', 'Refusé', 'Autre']);
+            $table->string('message')->nullable();
             $table->foreignId('department_id')->constrained()->onDelete('cascade');
             $table->foreignId('correspondence_id')->constrained()->onDelete('cascade');
             $table->timestamps();
