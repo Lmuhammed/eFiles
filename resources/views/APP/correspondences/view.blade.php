@@ -33,68 +33,72 @@
                 </div>
                  </div>
                      </div>
-                    <hr>
-                        <div class="row h3">
-                            <div class="col-8">
-                                Fichiers associés 
-                            </div>
-                            <div class="col-4">
-                                <a href="{{ route('files.create',$correspondence) }}" class="btn btn-success">Ajouter nouveau fichier </a>
-                            </div>
-                        </div>
                         
-                    <hr>
-                    <div class="accordion" id="accordionExample">
-                    @foreach ($files as $file)
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="heading{{ $loop->index }}">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $loop->index }}" aria-expanded="true" aria-controls="collapse{{ $loop->index }}">
-                            No fichier {{ ($loop->index)+1 }}
-                             
-                            </button>
-                          </h2>
-                          <div id="collapse{{ $loop->index }}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <iframe src="{{ $file['file_path'] }}" frameborder="0"></iframe>   
-                            </div>
-                          </div>
-                           {{-- delete file --}}
-                           <div class="col-4">
-                            <form action="{{ route('files.destroy', $file) }}" method="POST">
-                              @csrf
-                              @method('DELETE')
-                              <button type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce fichier ?');" class="btn btn-danger">Supprimer</button>
-                            </form>  
-                        </div>
-                        {{-- preview --}}
-                        <div class="col-8">
-                            <a target="_blank" href="{{ $file['file_path'] }}" class="btn btn-dark">Ouvrir dans un nouvel onglet                            </a>
-                        </div>
-                        </div>
-                        {{-- delete file --}}
-
-                    @endforeach
-                </div>
         </div>
     </div>
+                        {{-- Fichier --}}
+                        <table class="table table-success table-striped-columns">">
+                            <caption class="h2">
+                                    @cannot('isEmployee')
+                                    <div class="col-4">
+                                        <a href="{{ route('files.create',$correspondence) }}" class="btn btn-success">Ajouter nouveau fichier </a>
+                                    </div>
+                                    @endcannot
+                            </caption>
+                            <thead>
+                                <th class="h2 text-center" colspan="5">Fichiers associés</th>
+                                <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">Nom Fichier</th>
+                                  <th scope="col">Créé à</th>
+                                  <th scope="col">Dernière mise à jour</th>
+                                  <th scope="col">Actions</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                @foreach ($files as $file)                                    
+                                <tr>
+                                  <th scope="row">{{ $loop->index }}</th>
+                                  <td>{{ $file->title  }}</td>
+                                  <td>{{ $file->created_at  }}</td>
+                                  <td>{{ $file->updated_at  }}</td>
+                                  <td>
+                                    <div class="row">
+                                        <div class="col">
+                                            @cannot('isEmployee')
+                                            <div>
+                                                <form action="{{ route('files.destroy', $file) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-danger" type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce fichier ?');" >Supprimer</button>
+                                                </form>
+                                            </div>
+                                             @endcannot
+                                        </div>
+                                        <div class="col">
+                                            <a target="_blank" href="{{ $file['file_path'] }}" class="btn btn-dark">Visualizer</a>
+                                        </div>
+                                    </div>
+                                </td>
+                                </tr>
+                                @endforeach
+                              </tbody>
+                            
+                        </table>
+
+                          
     
 </div>
-
+@can('isAdmin')
+    
 {{-- Table department can acsses --}}
-<div class="row">
-    <div class="col-10">
-        <div class="h2 text-center border border-dark mb-3">
-            Les départements ayant accès
-        </div>
-    </div>
-    
-    <div class="col-2 ">
-        <a class="btn btn-dark" target="_blank" href="{{ route('dp_cor_grantAccessView',$correspondence) }}">Ajouter</a>
-    </div>
-</div>
-
 <table class="table table-striped">
-    <thead>
+    <thead class="table-warning">
+        <th class="h2 text-center" colspan="5">Les départements ayant accès
+            @cannot('isEmployee')
+            <a class="btn btn-dark" target="_blank" href="{{ route('dp_cor_grantAccessView',$correspondence) }}">Ajouter</a>
+            @endcannot
+        </th>
       <tr>
         <th scope="col">#</th>
         <th scope="col">Nom du département</th>
@@ -106,11 +110,12 @@
     <tbody class="table-group-divider">
         @foreach ($correspondence->accessDepartments as $department)
         <tr>
-            <td>{{"1"}}</td>            
+            <td>{{ ($loop->index)+1 }}</td>            
             <td>{{ $department->name  }}</td>
             <td>{{ $department->pivot->created_at  }}</td>
             <td >{{ $department->pivot->updated_at  }}</td>
             <td>
+                @can('isManager')
                 <div>
                     <form action="{{ route('dp_cor_revokeAccess', ['correspondence' => $correspondence , 'departmentId' => $department->id]) }}" method="POST">
                         @csrf
@@ -118,62 +123,67 @@
                         <button type="submit" onclick="return confirm('Voulez-vous supprimer la permession ?');" class="btn btn-danger">Supprimer</button>
                     </form>
                 </div>
+                @endcan
             </td>
         </tr>
         @endforeach
     </tbody>
   </table>
 
-{{-- Table department can Approve --}}
-<div class="row">
-    <div class="col-10">
-        <div class="h2 text-center border border-dark mb-3">
-            Liste des approbateurs
-        </div>
-    </div>
-    
-    <div class="col-2">
-        <form action="{{ route('dp_cor_approve', $correspondence ) }}" method="POST">
-            @csrf
-            <button type="submit" onclick="return confirm('Approve it ?');" class="btn btn-dark">Approuvez-le</button>
-        </form>  
-    </div>
-</div>
+@endcan
 
+{{-- Table department can Approve --}}
 <table class="table">
-    <thead class="table-dark">
+    <thead>
+        <th class="h2 text-center" colspan="6">
+            <div class="row">
+                <div class="col">
+                    Liste des approbateurs
+                </div>
+                <div class="col">
+                @can('isEmployee')
+                <div class="col-2">
+                    <form action="{{ route('dp_cor_approve', $correspondence ) }}" method="POST">
+                        @csrf
+                        <button type="submit" onclick="return confirm('Approve it ?');" class="btn btn-success">Approuvez-le</button>
+                    </form>  
+                </div>
+                @endcan
+                </div>
+            </div>
+            
+        </th>
         <tr>
         <th scope="col">#</th>
         <th scope="col">Département</th>
         <th scope="col">Status</th>
         <th scope="col">Approuvé à</th>
         <th scope="col">Dernière mise à jour</th>    
-        <th scope="col">Actions</th>
+        {{-- <th scope="col">Actions</th> --}}
       </tr>
     </thead>
     <tbody class="table-group-divider">
         @foreach ($correspondence->approvedDepartments as $approvedD)
-        <tr>
-            <td>{{ "1"  }}</td>
-            <td>{{ $approvedD->name  }}</td>
-            <td>{{ $approvedD->pivot->status  }}</td>
-            <td>{{ '-'  }}</td>
-            <td>{{ $approvedD->pivot->created_at  }}</td>
-            <td >{{ $approvedD->pivot->updated_at  }}</td>
-            <td>
-                <div>
-                    <form action="{{ route('dp_cor_revokeApproval', ['correspondence' => $correspondence, 'departmentId' => $approvedD->id] ) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" onclick="return confirm('Are you sure you want to delete this department?');" class="btn btn-danger">Supprimer</button>
-                    </form>
-                </div>
-            </td>
+       <tr>
+        <td>{{ ($loop->index)+1 }} </td>
+        <td>{{ $approvedD->name  }}</td>
+        <td>{{ '$approvedD->pivot->status'  }}</td>
+        <td>{{ $approvedD->pivot->created_at  }}</td>
+        <td >{{ $approvedD->pivot->updated_at  }}</td>
+        <td>
+            {{-- @can('isEmployee')
+            <div>
+                <form action="{{ route('dp_cor_revokeApproval', ['correspondence' => $correspondence, 'departmentId' => $approvedD->id] ) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" onclick="return confirm('Are you sure you want to delete this department?');" class="btn btn-danger">Supprimer</button>
+                </form>
+            </div>
+            @endcan --}}
+        </td>
         </tr>
-        @endforeach
+     @endforeach
     </tbody>
   </table>    
-
 {{-- end Table department can Approve --}}
-
 @endsection

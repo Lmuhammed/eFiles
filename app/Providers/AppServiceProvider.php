@@ -45,11 +45,11 @@ class AppServiceProvider extends ServiceProvider
 
       
 
-        /* define a user role */
+        /* define a isEmployee role */
 
-        Gate::define('isUser', function($user) {
+        Gate::define('isEmployee', function($user) {
 
-            return $user->role == 'user';
+            return $user->role == 'employee';
 
         });
 

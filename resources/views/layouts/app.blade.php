@@ -26,7 +26,12 @@
             border-color: #000000; /* Change border color on hover */
             background-color: #d3d3d3; /* Change background color on hover */
         }
+        
+        .accordion-button:hover{
+            border-color: #000000; /* Change border color on hover */
+            background-color: #e74080; /* Change background color on hover */
 
+        }
 
     </style>
     @yield('styles')
@@ -53,12 +58,12 @@
             <x-seesion-msg message{{ $error  }} color="danger" />
             @endforeach
             @endif
-            <div class="container-fluid">    
-            @auth
-            @can('isAdmin')
-            @include('layouts.sideBar')
-            @endcan  
-            @endauth      
+            <div class="container-fluid"> 
+                @auth
+                    @can('isAdmin')
+                    @include('layouts.sideBar')        
+                    @endcan
+                @endauth
             <main class="col-md-9 ms-sm-auto col-lg-10 px-4">
                 @yield('content')
             </main>

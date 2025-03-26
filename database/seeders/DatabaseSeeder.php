@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         //User::factory(10)->create();
         //Department::factory(10)->create();
         //File::factory(10)->create();
-        Department::factory()->create([
+      /*   Department::factory()->create([
             'id' => 1,
             'name' => 'DEV',
         ]); 
@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
             'department_id' => 2,
             'password' => Hash::make('123456'),
         ]);   
-
+ */
         Correspondence::factory(10)->create();
 
         
