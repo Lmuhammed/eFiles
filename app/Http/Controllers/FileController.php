@@ -20,21 +20,27 @@ class FileController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request ,Correspondence $correspondence , File $file)
+    public function store(Request $request ,Correspondence $correspondence )
     {
-        $data=$request->validate([
-
-            'file' => 'required|mimes:jpg,png,pdf,xlx,csv|max:10240' /*Max size 10M*/,
-            'title' =>'required',
-
+        $request->validate([
+            'files' => 'required|array',
+            'files.*' => 'required|mimes:jpg,png,pdf,xlx,csv|max:10240',
         ]);
+ 
+        $files = [];
+  
+        foreach($request->file('files') as $file) {
 
-        $data['file'] = time().'.'.$data['file']->extension();  
-        $request->file->move(public_path('uploads'), $data['file'] );
-        $data['file_path'] = url('uploads/'.$data['file']);
-        $data['correspondence_id'] = $correspondence->id;
-        
-        $file::create($data);
+            $fileName = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+             
+            $file->move(public_path('uploads'), $fileName);
+  
+            $files[] = ['file_path' => $fileName,'title' => 'facture' , 'correspondence_id' => $correspondence->id];
+        }
+  
+        foreach ($files as $fileData) {
+            File::create($fileData);
+        }
 
         return redirect()->route('correspondences.show',$correspondence)->with('msg-color','success')
         ->with('message','Fichier téléchargé avec succès');

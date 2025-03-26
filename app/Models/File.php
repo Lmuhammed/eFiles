@@ -14,10 +14,7 @@ class File extends Model
     protected $fillable = [
         'title',
         'file_path',
-/*       'requires_approval',
-        'approval_deadline',
-
- */       'correspondence_id',
+        'correspondence_id',
     ];
 
     public function correspondence()

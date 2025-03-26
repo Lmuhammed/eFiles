@@ -70,5 +70,11 @@
             </div>
         
 
+
 </body>
+
+<script>
+    @yield('scripts');
+</script>
+
 </html>

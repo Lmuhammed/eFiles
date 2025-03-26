@@ -41,12 +41,13 @@
  
          <div>
              <label for="file" class="form-label">Upload file</label>
-             <input class="form-control form-control-lg" id="file" type="file" name="file">
+             <input class="form-control form-control-lg" id="file" type="file" name="files[]" multiple>
              <p class="mt-1 text-sm text-success" id="file_input_help">Extensions de fichier autorisées : PDF, PNG, JPG .</p>
          </div>
-     <div class="d-grid gap-2">
-      <button type="submit" class="btn btn-secondary btn-lg">Télécharger</button>
-    </div>
+          
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-secondary btn-lg">Télécharger</button>
+          </div>
  </form>
 </div>
 </div>
