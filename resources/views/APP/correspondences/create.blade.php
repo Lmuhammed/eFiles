@@ -60,9 +60,11 @@
 
         </div>
 
-        <div class="mb-3">
-            <label for="note" class="form-label">Remarque</label>
-            <textarea class="form-control border border-4" id="note" rows="3" name="note" ></textarea>
+        
+        <div>
+            <label for="file" class="form-label">Fichiers</label>
+            <input class="form-control form-control-lg" id="file" type="file" name="files[]" multiple>
+            <p class="mt-1 text-sm text-success" id="file_input_help">Extensions de fichier autorisées : PDF, PNG, JPG .</p>
         </div>
 
         <div class="d-grid gap-2">

@@ -78,7 +78,6 @@
             <td>{{ $department->pivot->created_at  }}</td>
             <td >{{ $department->pivot->updated_at  }}</td>
             <td>
-                @can('isManager')
                 <div>
                     <form action="{{ route('dp_cor_revokeAccess', ['correspondence' => $correspondence , 'departmentId' => $department->id]) }}" method="POST">
                         @csrf
@@ -86,7 +85,6 @@
                         <button type="submit" onclick="return confirm('Voulez-vous supprimer la permession ?');" class="btn btn-danger">Supprimer</button>
                     </form>
                 </div>
-                @endcan
             </td>
         </tr>
         @endforeach
@@ -99,6 +97,11 @@
     <div class="h2 col-8 border border-dark px-1 py-1">
         Liste des approbateurs
     </div>
+    @can('isManager')
+    <div class="col">
+        <a target="_blank" href="{{ route('dp_cor_grantAccess',$correspondence) }}" class="btn btn-dark">Ajouter</a>
+    </div>
+    @endcan
     @can('isEmployee')
     <div class="col-4">
         <form action="{{ route('dp_cor_approve', $correspondence ) }}" method="POST">

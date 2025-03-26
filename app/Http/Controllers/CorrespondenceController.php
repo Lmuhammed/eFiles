@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Department;
 use App\Models\Correspondence;
+use App\Models\Department;
+use App\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,13 +43,31 @@ class CorrespondenceController extends Controller
             'object' =>'required',
             'status' =>'required',
             'type' =>'required',
+            'files' => 'required|array',
+            'files.*' => 'required|mimes:jpg,png,pdf,xlx,csv|max:10240',
 
         ]);
 
         $data['user_id'] = Auth::id();
 
-        $Correspondence::create($data);
+        $correspondence=$Correspondence::create($data);
+        $correspondenceId = $correspondence->id; // Access the ID of the newly created record
 
+        //files
+        $files = [];
+  
+        foreach($request->file('files') as $file) {
+
+            $fileName = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+             
+            $file->move(public_path('uploads'), $fileName);
+  
+            $files[] = ['file_path' => $fileName,'title' => 'facture' , 'correspondence_id' => $correspondenceId];
+        }
+  
+        foreach ($files as $fileData) {
+            File::create($fileData);
+        }
         return redirect()->route('correspondences.index')->with('msg-color','success')
         ->with('message','courriers Envoyé avec succès');
     }

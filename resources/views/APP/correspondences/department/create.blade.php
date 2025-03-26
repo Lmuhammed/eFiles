@@ -13,7 +13,8 @@
         <p><strong>Objet :</strong> <span id="userPhone"> {{ $correspondence['object'] }} </span></p>
         <p><strong>Source :</strong> <span id="userPhone"> {{ $correspondence['object'] }} </span></p>
         <p><strong>Destination :</strong> <span id="userPhone"> {{ $correspondence['object'] }} </span></p>
-        <p><strong>Upload  Date :</strong> <span id="userLocation">{{ $correspondence['created_at'] }}</span></p>
+        <p><strong>Créé à :</strong> <span id="userLocation">{{ $correspondence['created_at'] }}</span></p>
+        <p><strong>Mis à jour à :</strong> <span id="userLocation">{{ $correspondence['created_at'] }}</span></p>
     </div>
 <div class="h3">
     Accorder l'accès 
@@ -28,6 +29,12 @@
                     </div>
     @endforeach
 </div>
+
+        <div class="mb-3">
+            <label for="note" class="form-label">Message vers les départements</label>
+            <textarea class="form-control" id="note" rows="3" name="note" ></textarea>
+        </div>
+
     <div class="d-grid gap-2">
         <button type="submit" class="btn btn-success btn-lg">Accorder</button>
     </div>

@@ -21,8 +21,11 @@ class CorrespondenceDepartmentController extends Controller
         $request->validate([
             'department_ids' => 'required|array', 
             'department_ids.*' => 'exists:departments,id', 
+            'note' => 'required',
         ]);
         $correspondence->accessDepartments()->attach($request->department_ids);
+        $correspondence->note=$request->note;
+
         return redirect()->route('correspondences.show',$correspondence)
         ->with('msg-color','success')
         ->with('message','Accès accordé avec succès');

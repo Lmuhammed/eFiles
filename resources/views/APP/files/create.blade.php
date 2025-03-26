@@ -33,14 +33,9 @@
       </div>
 <form action="{{ route('files.store',$correspondence) }}" method="post" enctype="multipart/form-data">
         @csrf
-
-        <div class="mb-3">
-             <label for="title" class="form-label">Nom du fichier</label>
-             <input type="text" class="form-control" id="title" name="title">
-           </div>
  
          <div>
-             <label for="file" class="form-label">Upload file</label>
+             <label for="file" class="form-label">Fichiers</label>
              <input class="form-control form-control-lg" id="file" type="file" name="files[]" multiple>
              <p class="mt-1 text-sm text-success" id="file_input_help">Extensions de fichier autorisées : PDF, PNG, JPG .</p>
          </div>
