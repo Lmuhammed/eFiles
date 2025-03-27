@@ -25,7 +25,7 @@ class CorrespondenceDepartmentController extends Controller
         ]);
         $correspondence->accessDepartments()->attach($request->department_ids);
         $correspondence->note=$request->note;
-
+        $correspondence->save();
         return redirect()->route('correspondences.show',$correspondence)
         ->with('msg-color','success')
         ->with('message','Accès accordé avec succès');
@@ -66,7 +66,7 @@ class CorrespondenceDepartmentController extends Controller
 /*          'department_ids' => 'required|array', 
             'department_ids.*' => 'exists:departments,id', 
             |in:Accepte,Refuse,Autre
- */         'message' => 'required',
+ */         'message' => 'required|string|max:52',
             'status' => 'required|integer|in:1,2,3',
             ]);
             //$status = $statuseses[$request->input('status')];
@@ -76,7 +76,7 @@ class CorrespondenceDepartmentController extends Controller
             'status' => $status,
             'message' => $data['message'],
            ]);
-          return redirect()->back()
+          return redirect()->route('correspondences.show',$correspondence)->with('msg-color','danger')
           ->with('msg-color','success')
           ->with('message','courriers approuvée avec succès');
   

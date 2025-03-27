@@ -12,9 +12,14 @@ php artisan db:seed
  ==========
 
 next Improvements :
+must :
 - more robust  authorization Using policies for each Model
 - remove department from admin & manager
 - refactor UI to use more Component
 - make self registerd users inactive so can admin made active
 - create profile containig accout info for each user
 - show all users for each department in admin panel
+- make form request error fr 
+
+optional :
+create a fav icone for the site

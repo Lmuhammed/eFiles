@@ -7,7 +7,7 @@
                         </p>
                     <hr>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" aria-current="page" href="{{ route('departments.index') }}">Départements</a>
+                        <a class="nav-link text-dark" aria-current="page" href="{{ route('departments.index') }}">Services</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" href="{{ route('users.index') }}">Utilisateurs</a>

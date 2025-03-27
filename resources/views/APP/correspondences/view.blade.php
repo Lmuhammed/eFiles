@@ -44,14 +44,30 @@
                         </div>
                     </div>
                     <div class="row mt-3 mb-3">
-                       @foreach ($files as $file)   
-                            <div class="col-5">
-                                <iframe src="{{ url("uploads/$file->file_path") }}" frameborder="1">
-                                </iframe>
-                                <div class="col">
-                                    <a target="_blank" href="{{ url("uploads/$file->file_path") }}" class="btn btn-dark">Visualizer</a>
+                       @foreach ($files as $file)           
+                       @if (empty($file->name))
+                       <div class="col-5">
+                        <iframe class="border border-dark" src="{{ url("uploads/$file->name") }}" frameborder="1">
+                        </iframe>
+                        
+                        <div class="col">
+                            <div class="row">
+                                <div class="col-6">
+                                    <p class="h5">
+                                        Fichier NO {{ ($loop->index)  +1 }}
+                                    </p>
                                 </div>
-                            </div> 
+                                <div class="col-6">
+                                    <a target="_blank" href="{{ url("uploads/$file->name") }}" class="btn btn-outline-success">Visualizer</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                       @else
+                       <div class="h4 text-danger">
+                        Le fichier est corrompu, veuillez télécharger un nouveau fichier.
+                       </div>
+                       @endif                 
                        @endforeach
                     </div>
 
@@ -94,26 +110,26 @@
 
 {{-- Table department can Approve --}}
 <div class="row">
-    <div class="h2 col-8 border border-dark px-1 py-1">
+    <div class="h2 col-8">
         Liste des approbateurs
     </div>
-    @can('isManager')
-    <div class="col">
-        <a target="_blank" href="{{ route('dp_cor_grantAccess',$correspondence) }}" class="btn btn-dark">Ajouter</a>
+   <div class="col-4">
+    <div class="row">
+        @can('isManager')
+        <div class="col-6">
+            <a target="_blank" href="{{ route('dp_cor_grantAccess',$correspondence) }}" class="btn btn-dark">Ajouter</a>
+        </div>
+        @endcan
+        @can('isEmployee')
+        <div class="col-6">
+            <a href="{{ route('approveView',$correspondence) }}" class="btn btn-success">Approuvez-le</a>
+        </div>
+        @endcan
     </div>
-    @endcan
-    {{-- @can('isEmployee') --}}
-    <div class="col-4">
-        {{-- <form action="{{ route('dp_cor_approve', $correspondence ) }}" method="POST">
-            @csrf
-            <button type="submit" onclick="return confirm('Approve it ?');" class="btn btn-success">Approuvez-le</button>
-        </form>  --}}
-        <a href="{{ route('approveView',$correspondence) }}" class="btn btn-success">Approuvez-le</a>
-    </div>
-    {{-- @endcan --}}
+   </div>
 </div>
 
-<table class="table">
+<table class="table mt-2">
     <thead>
         <tr>
         <th scope="col">#</th>
@@ -144,7 +160,7 @@
             </div>
             @endcan --}}
         </td>
-        </tr>
+    </tr>
      @endforeach
     </tbody>
   </table>    

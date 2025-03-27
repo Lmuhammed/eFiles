@@ -16,6 +16,17 @@
         <p><strong>Créé à :</strong> <span id="userLocation">{{ $correspondence['created_at'] }}</span></p>
         <p><strong>Mis à jour à :</strong> <span id="userLocation">{{ $correspondence['created_at'] }}</span></p>
     </div>
+    <hr>
+    @if ($correspondence->note)
+    <div class="h3">
+        Message
+        <p>
+            <strong>
+                {{ $correspondence->note }}
+            </strong>
+        </p>
+    </div>
+    @endif
 <div class="h3">
     Choisir status 
 </div>
@@ -35,6 +46,9 @@
       {{-- message --}}
     <div class="mb-3 h4 mt-3">
             <label for="message" class="form-label">Message</label>
+            <span class="text-danger">
+                ⚠️ Ne peut pas dépasser 50 caractères
+            </span>
             <textarea class="form-control" id="message" rows="3" name="message" ></textarea>
         </div>
 
