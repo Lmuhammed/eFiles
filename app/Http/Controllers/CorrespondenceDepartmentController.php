@@ -44,24 +44,38 @@ class CorrespondenceDepartmentController extends Controller
       
       public function approveView(Correspondence $correspondence )
       {  
-        
-          return view('APP.correspondences.department.approval');
+            $statuseses = [
+            1 => 'Accepté',
+            2 => 'Refusé',
+            3 => 'Autre',
+            ];
+          return view('APP.correspondences.department.approval',compact('statuseses','correspondence'));
   
       }
 
-      public function approve(Correspondence $correspondence )
+      public function approve(Correspondence $correspondence ,Request $request)
       {  
 
-        $request->validate([
-            'department_ids' => 'required|array', 
+            $statuseses = [
+            1 => 'Accepté',
+            2 => 'Refusé',
+            3 => 'Autre',
+            ];
+
+            $data=$request->validate([
+/*          'department_ids' => 'required|array', 
             'department_ids.*' => 'exists:departments,id', 
-            'note' => 'required',
-        ]);
-        // Attach the department to the file for approval
-          //$correspondence->approvedDepartments()->attach(Auth::user()->department_id);
-          $correspondence->approvedDepartments()->attach(Auth::user()->department_id, [
-            'message' => 'Your custom message here',
-        ]);
+            |in:Accepte,Refuse,Autre
+ */         'message' => 'required',
+            'status' => 'required|integer|in:1,2,3',
+            ]);
+            //$status = $statuseses[$request->input('status')];
+            $status = $statuseses[$data['status']];
+            //$correspondence->approvedDepartments()->attach(Auth::user()->department_id);
+            $correspondence->approvedDepartments()->attach(Auth::user()->department_id, [
+            'status' => $status,
+            'message' => $data['message'],
+           ]);
           return redirect()->back()
           ->with('msg-color','success')
           ->with('message','courriers approuvée avec succès');

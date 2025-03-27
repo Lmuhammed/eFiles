@@ -44,6 +44,7 @@ class Correspondence extends Model
     public function approvedDepartments()
      {
          return $this->belongsToMany(Department::class, 'correspondence_department_approval')
+                    ->withPivot('status', 'message')
                      ->withTimestamps();
      }
  

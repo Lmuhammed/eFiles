@@ -58,7 +58,7 @@ Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.d
 
 Route::get('/correspondences/Received', [CorrespondenceController::class, 'received'])->name('correspondences.received');//Get Received correspondences
 Route::get('/correspondences/{correspondence}', [CorrespondenceController::class, 'show'])->name('correspondences.show');
-Route::post('/dp_cor/approve', [CorrespondenceDepartmentController::class, 'approveView'])->name("approveView");
+Route::get('/dp_cor/approve/{correspondence}', [CorrespondenceDepartmentController::class, 'approveView'])->name("approveView");
 Route::post('/dp_cor/{correspondence}/approve', [CorrespondenceDepartmentController::class, 'approve'])->name("dp_cor_approve");
 Route::delete('/dp_cor/{correspondence}/{departmentId}/revoke-approval', [CorrespondenceDepartmentController::class, 'revokeApproval'])->name("dp_cor_revokeApproval");
 // Route::post('/sync', [DepartmentFileController::class, 'sync'])->name('d_f.sync'); maybe later

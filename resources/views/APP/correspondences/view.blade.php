@@ -102,15 +102,15 @@
         <a target="_blank" href="{{ route('dp_cor_grantAccess',$correspondence) }}" class="btn btn-dark">Ajouter</a>
     </div>
     @endcan
-    @can('isEmployee')
+    {{-- @can('isEmployee') --}}
     <div class="col-4">
         {{-- <form action="{{ route('dp_cor_approve', $correspondence ) }}" method="POST">
             @csrf
             <button type="submit" onclick="return confirm('Approve it ?');" class="btn btn-success">Approuvez-le</button>
         </form>  --}}
-        <a href="{{ route('approveView') }}" class="btn btn-success">Approuvez-le</a>
+        <a href="{{ route('approveView',$correspondence) }}" class="btn btn-success">Approuvez-le</a>
     </div>
-    @endcan
+    {{-- @endcan --}}
 </div>
 
 <table class="table">
@@ -119,7 +119,7 @@
         <th scope="col">#</th>
         <th scope="col">Département</th>
         <th scope="col">Status</th>
-        <th scope="col">Approuvé à</th>
+        <th scope="col">Message</th>
         <th scope="col">Dernière mise à jour</th>    
         {{-- <th scope="col">Actions</th> --}}
       </tr>
@@ -129,9 +129,10 @@
        <tr>
         <td>{{ ($loop->index)+1 }} </td>
         <td>{{ $approvedD->name  }}</td>
-        <td>{{ '$approvedD->pivot->status'  }}</td>
+        <td>{{ $approvedD->pivot->status  }}</td>
+        <td>{{ $approvedD->pivot->message  }}</td>
         <td>{{ $approvedD->pivot->created_at  }}</td>
-        <td >{{ $approvedD->pivot->updated_at  }}</td>
+        {{-- <td >{{ $approvedD->pivot->updated_at  }}</td> --}}
         <td>
             {{-- @can('isEmployee')
             <div>
