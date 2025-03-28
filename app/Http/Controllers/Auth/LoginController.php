@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -25,6 +27,23 @@ class LoginController extends Controller
      *
      * @var string
      */
+
+     protected function login(Request $request)
+    {
+        $this->validate($request, [
+            'user_name' => 'required|string',
+            'password' => 'required|string',
+        ]);
+
+        if (Auth::attempt(['user_name' => $request->user_name, 'password' => $request->password])) {
+            return redirect()->intended('home');
+        }
+
+        return back()->withErrors([
+            'user_name' => 'Les identifiants fournis ne correspondent pas à nos records.',
+        ]);
+    }
+
     protected $redirectTo = '/home';
 
     /**
