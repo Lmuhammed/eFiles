@@ -37,7 +37,7 @@ class CorrespondenceController extends Controller
     {
         $data=$request->validate([
 
-            'code' => 'required',
+            'code' => ['required','unique:correspondences'],
             'source' =>'required',
             'destination' => 'required',
             'object' =>'required',

@@ -12,7 +12,7 @@
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Nom') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Nom Complet') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -60,7 +60,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Sélectionner département') }}</label>
+                            <label class="col-md-4 col-form-label text-md-end">{{ __('Sélectionner département') }}</label>
 
                             <div class="col-md-6">
                                 @foreach($departments as $department)
@@ -71,7 +71,7 @@
                                         
                                     </label>
                                 </div>
-                            @endforeach
+                                @endforeach
                             </div>
                         </div>
 

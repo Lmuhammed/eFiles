@@ -22,18 +22,12 @@ Créer nouveau utilisateur
                                 <input type="password" class="form-control border border-4" id="password" name="password">
                         </div>
 
-                        <div class="mb-3">
-                                <label for="department_id" class="form-label">Choisir département</label>
+                        <select class="form-select mb-3" aria-label="Default select example">
+                                <option selected>Choisir département</option>
                                 @foreach($departments as $department)
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="department_id" id="{{$department->id }}" value="{{ $department->id }}"
-                                    <label class="form-check-label" for="{{$department->id}}" >
-                                        {{ $department->name }}
-                                        
-                                    </label>
-                                </div>
+                                <option name="department_id" value="{{$department->id }}" >{{$department->name }}</option>
                             @endforeach
-                        </div>
+                        </select>
                 </div>
                
         </div>
