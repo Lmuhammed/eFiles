@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\Models\Department;
+use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+
 
 class RegisterController extends Controller
 {
@@ -29,8 +31,18 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
 
+    protected function redirectTo()
+    {
+            if ( ! (auth()->user()->is_active) ) {
+               
+                Auth::logout();
+                echo "<h2>Votre compte a été désactivé.Contacter votre administrateur</h2>";
+                die;
+
+            }
+            return '/home';
+    }
     /**
      * Create a new controller instance.
      *

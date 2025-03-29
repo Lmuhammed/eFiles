@@ -36,6 +36,13 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt(['user_name' => $request->user_name, 'password' => $request->password])) {
+            if ( ! (auth()->user()->is_active) ) {
+                
+                Auth::logout();
+                echo "<h2>Votre compte a été désactivé.Contacter votre administrateur</h2>";
+                die;
+
+            }
             return redirect()->intended('home');
         }
 

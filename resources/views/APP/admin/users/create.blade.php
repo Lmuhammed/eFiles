@@ -13,8 +13,8 @@ Créer nouveau utilisateur
                                 <input type="text" class="form-control border border-4" id="name" name="name">
                         </div>
                         <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control border border-4" id="email" name="email">
+                                <label for="user_name" class="form-label">Nom d'utilisateur</label>
+                                <input type="text" class="form-control border border-4" id="user_name" name="user_name">
                         </div>  
                         
                         <div class="mb-3">

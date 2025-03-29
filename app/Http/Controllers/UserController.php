@@ -9,9 +9,33 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
 
-    public function all()
+    public function all(Request $request)
     {
-        $users = User::latest()->paginate(7);
+        $query = User::query();
+
+        if ($request->input('show_inactive')) {
+            $query->where('is_active', false);
+        }
+    
+        if($request->input('role') !== '' ){
+
+        if ($request->input('role') === 'manager') {
+            $query->orWhere('role', 'manager');
+        }
+        elseif($request->input('role') === 'admin'){
+            $query->orWhere('role', 'admin');
+            
+        }
+        elseif($request->input('role') === 'employee'){
+            $query->orWhere('role', 'employee');
+        }
+         }
+    
+    
+        
+        $users = $query->orderBy('created_at', 'desc')->get();
+    
+        //$users = User::latest()->paginate(7);
         return view('APP.admin.users.all', compact('users'));
     }
 
@@ -24,8 +48,8 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'name' => ['required', 'string', 'max:30','min:5'],
+            'user_name' => ['required', 'string','min:4', 'max:20','unique:users'],
             'password' => 'required|string|min:8',
             'department_id' => 'required','exists:departments,id',
 
@@ -35,6 +59,25 @@ class UserController extends Controller
         User::create($data);
         return redirect()->route('users.index')->with('msg-color', 'success')
             ->with('message', 'Utilisateur ajouté avec succès');
+    }
+
+    public function activate(User $user)
+    {
+        $user->is_active=true;
+        $user->save();
+        $users = User::all();
+        return view('APP.admin.users.all', compact('users'))->with('msg-color', 'success')
+        ->with('message', 'L\'utilisateur a été activé avec succès');
+    }
+
+    public function disactivate(User $user)
+    {
+       
+        $user->is_active=false;
+        $user->save();
+        $users = User::all();
+        return view('APP.admin.users.all', compact('users'))->with('msg-color', 'success')
+        ->with('message', 'L\'utilisateur a été désactivé avec succès');
     }
 
     public function edit(User $user)

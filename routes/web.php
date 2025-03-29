@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
+
 // auth
 Auth::routes();
 
@@ -53,7 +54,8 @@ Route::post('users', [UserController::class, 'store'])->name('users.store');
 Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
 Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
 Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
-
+Route::post('activate/{user}', [UserController::class, 'activate'])->name('users.activate');
+Route::post('disactivate/{user}', [UserController::class, 'disactivate'])->name('users.disactivate');
 });
 
 Route::get('/correspondences/Received', [CorrespondenceController::class, 'received'])->name('correspondences.received');//Get Received correspondences
