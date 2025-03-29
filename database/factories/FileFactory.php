@@ -18,11 +18,12 @@ class FileFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => Str::random(4),
-            //'correspondence_id' => $this->faker->numberBetween(1, 14),
+            'name' => Str::random(4),
             'correspondence_id' => 1,
+            'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
+            'updated_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
             //change APP_URL in .env for port run by artisan eg 8000,
-            'file_path' => url('/uploads/1.pdf'),
+            // 'file_path' => url('/uploads/1.pdf'),
         ];
      
     }

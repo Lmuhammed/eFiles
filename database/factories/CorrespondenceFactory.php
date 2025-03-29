@@ -21,7 +21,10 @@ class CorrespondenceFactory extends Factory
                 'source' => $this->faker->city,
                 'destination' => $this->faker->city,
                 'object' => $this->faker->sentence, 
-                'user_id' => 5, 
+                'date' => $this->faker->dateTimeBetween('-1 year', 'now'),
+                'user_id' => 1, 
+                'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
+                'updated_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
             ];       
     }
 }
