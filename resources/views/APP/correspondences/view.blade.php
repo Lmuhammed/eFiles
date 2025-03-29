@@ -45,7 +45,6 @@
                     </div>
                     <div class="row mt-3 mb-3">
                        @foreach ($files as $file)           
-                       @if (empty($file->name))
                        <div class="col-5">
                         <iframe class="border border-dark" src="{{ url("uploads/$file->name") }}" frameborder="1">
                         </iframe>
@@ -62,13 +61,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div> 
-                       @else
-                       <div class="h4 text-danger">
-                        Le fichier est corrompu, veuillez télécharger un nouveau fichier.
-                       </div>
-                       @endif                 
-                       @endforeach
+                    </div>                        
+                    @endforeach 
                     </div>
 
                           

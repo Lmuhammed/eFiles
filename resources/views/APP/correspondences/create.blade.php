@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @section('title', "Create Correspondence")
+@section('extra_css')
+    <link rel="stylesheet" href="{{ asset('css/jquery.fily.css') }}">
+@endsection
 @section('content')
 <div class="text-center h2">
     Créer une nouvelle courrier
@@ -60,7 +63,6 @@
 
         </div>
 
-        
         <div>
             <label for="file" class="form-label">Fichiers</label>
             <input class="form-control form-control-lg" id="file" type="file" name="files[]" multiple>
@@ -72,4 +74,9 @@
         </div>            
  </form>
     
+@endsection
+
+@section('extra_js')
+<script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
+<script src="{{ asset('js/jquery.fily.js') }}"></script>
 @endsection

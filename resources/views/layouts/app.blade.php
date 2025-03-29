@@ -9,7 +9,8 @@
     <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    <style>
+
+<style>
         .vertical-navbar {
             height: 100vh; 
             padding-top: 0; 
@@ -35,7 +36,8 @@
         }
 
     </style>
-    @yield('styles')
+
+@yield('extra_css')
 </head>
 <body>
     <div id="app">
@@ -69,13 +71,6 @@
                 @yield('content')
             </main>
             </div>
-        
-
-
+            @yield('extra_js')        
 </body>
-
-<script>
-    @yield('scripts');
-</script>
-
 </html>
