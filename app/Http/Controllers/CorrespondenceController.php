@@ -43,6 +43,7 @@ class CorrespondenceController extends Controller
             'object' =>'required',
             'status' =>'required',
             'type' =>'required',
+            'date' =>'required|date',
             'files' => 'required|array',
             'files.*' => 'required|mimes:jpg,png,pdf,xlx,csv|max:10240',
 

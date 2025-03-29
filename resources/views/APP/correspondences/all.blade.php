@@ -16,8 +16,8 @@
           <th scope="col">Source</th>
           <th scope="col">Destination</th>
           <th scope="col" >Status</th>
+          <th scope="col">Date</th>
           <th scope="col">Créé à</th>
-          <th scope="col">Mis à jour à</th>
           <th scope="col">Actions</th>
         </tr>
       </thead>
@@ -30,8 +30,8 @@
            <td> {{ $correspondence['source'] }} </td>
            <td> {{ $correspondence['destination'] }} </td>
            <td> {{ $correspondence['status'] }} </td>
+           <td> {{ $correspondence['date'] }} </td>
            <td> {{ $correspondence['created_at'] }} </td>
-           <td> {{ $correspondence['updated_at'] }} </td>
            <td>
             <div class="row">
               <div class="col-6">
