@@ -60,18 +60,16 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label class="col-md-4 col-form-label text-md-end">{{ __('Sélectionner département') }}</label>
-
-                            <div class="col-md-6">
-                                @foreach($departments as $department)
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="department_id" id="{{$department->id }}" value="{{ $department->id }}"
-                                    <label class="form-check-label" for="{{$department->id}}" >
-                                        {{ $department->name }}
-                                        
-                                    </label>
-                                </div>
-                                @endforeach
+                            <div class="col-4"></div>
+                            <div class="col-6">
+                                <select name="department_id" class="form-select border border-4" aria-label="Default select example">
+                                    <option selected >Sélectionner département</option>
+                                    @forelse ($departments as $department)
+                                        <option value="{{ $department->id }}">{{ $department->name }}</option>
+                                    @empty
+                                        <div class="text-center text-danger h5"> AUCUNE département </div>
+                                    @endforelse
+                                </select>
                             </div>
                         </div>
 
