@@ -10,10 +10,33 @@ use Illuminate\Support\Facades\Auth;
 
 class CorrespondenceController extends Controller
 {
-    /**
+    
+    
+    public function search(Request $request)
+     {
+         $request->validate([
+             'search' => 'nullable|string',
+         ]);
+ 
+         $query = Correspondence::query();
+ 
+         if ($request->filled('search')) {
+             $searchTerm = $request->search;
+             $query->where(function($q) use ($searchTerm) {
+                 $q->where('source', 'like', '%' . $searchTerm . '%')
+                   ->orWhere('destination', 'like', '%' . $searchTerm . '%')
+                   ->orWhere('code', 'like', '%' . $searchTerm . '%');
+
+             });
+         }
+ 
+         $correspondences = $query->paginate(7);
+ 
+         return view('APP.correspondences.all', compact('correspondences'));
+    }
+     /**
      * Display a listing of the resource.
      */
-    
     public function index()
     {
         $correspondences = Correspondence::latest()->paginate(7);

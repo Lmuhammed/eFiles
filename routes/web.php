@@ -43,6 +43,7 @@ Route::get('/correspondences', [CorrespondenceController::class, 'index'])->name
 Route::get('/correspondences/create', [CorrespondenceController::class, 'create'])->name('correspondences.create');
 Route::post('/correspondences', [CorrespondenceController::class, 'store'])->name('correspondences.store');
 Route::get('/correspondences/Sent', [CorrespondenceController::class, 'sent'])->name('correspondences.sent');//Get sent correspondences
+Route::get('/correspondences/search', [CorrespondenceController::class, 'search'])->name('correspondences.search');
 Route::get('/correspondences/{correspondence}/edit', [CorrespondenceController::class, 'edit'])->name('correspondences.edit');
 Route::put('/correspondences/{correspondence}', [CorrespondenceController::class, 'update'])->name('correspondences.update');
 Route::delete('/correspondences/{correspondence}', [CorrespondenceController::class, 'destroy'])->name('correspondences.destroy');

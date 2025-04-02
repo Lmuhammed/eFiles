@@ -1,11 +1,24 @@
 @extends('layouts.app')
 @section('title', "Tout les courriers")
 @section('content')
-    @can('isManager')
-    <div class="h2">
-      Tout les courriers
-      <div>
-        <a href="{{ route('correspondences.create') }}">Créer nouveau</a>
+    
+    <div class="row mb-3">
+      <div class="col-6">
+        <div class="h2">
+          
+          <a href="{{ route('correspondences.index') }}">Tout les courriers</a>
+          <div>
+            <a class="btn btn-warning mt-2" href="{{ route('correspondences.create') }}">Créer nouveau</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <form action="{{ route('correspondences.search') }}" method="GET">
+          <input type="text" name="search" class="form-control" placeholder="Recher par : Code ,Source ou Destination" value="{{ request('search') }}">
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-success btn-sm mt-2">Recher</button>
+          </div>
+      </form>
       </div>
     </div>
     <table class="table table-hover">
@@ -59,13 +72,5 @@
     
     {{-- Pagination --}}
     {{ $correspondences->links() }}
-    
-    @endcan
-   @can('isAdmin')
-<div class="h1 text-center text-light">
-   <div class=" my-auto bg-dark">
-    Bienvenue Mr Admin !
-  </div>
-</div>
-   @endcan
+  
 @endsection
