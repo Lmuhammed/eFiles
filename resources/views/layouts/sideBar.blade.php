@@ -2,7 +2,7 @@
         <nav class="col-md-3 col-lg-2 d-md-block bg-light vertical-navbar h4">
             <div class="position-sticky">
                 <ul class="nav flex-column">                        
-                        <p class="text-danger">
+                        <p class="text-dark h3">
                             Tâches administratives
                         </p>
                     <hr>
