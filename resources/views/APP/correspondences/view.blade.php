@@ -39,9 +39,9 @@
                         <div class="h2 col-8 border border-dark px-1 py-1">
                             Fichiers associés
                         </div>
-                        <div class="col-4">
+                        {{-- <div class="col-4">
                             <a href="{{ route('files.create',$correspondence) }}" class="btn btn-success">Ajouter nouveau fichier </a>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="row mt-3 mb-3">
                        @foreach ($files as $file)           

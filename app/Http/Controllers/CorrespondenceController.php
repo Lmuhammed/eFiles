@@ -48,8 +48,8 @@ class CorrespondenceController extends Controller
      */
     public function create()
     {
-        $statuses = ['Informational', 'Urgent', 'Routine'];
-        $types =  ['Letter', 'Invoice', 'Report','Recommendation'];
+        $statuses = ['Informationnel', 'Urgent', 'Routinière'];
+        $types = ['Lettre', 'Facture', 'Rapport', 'Recommandation'];
         return view('APP.correspondences.create',compact('statuses','types'));
     }
 

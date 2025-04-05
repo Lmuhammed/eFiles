@@ -6,8 +6,8 @@
 </div>
 <div class="row"> 
       
-<div class="col-6">
-    <div>
+<div class="col-6 mx-auto text-center">
+    <div class="h3 mb-2">
       Les informations de la courrier
     </div>
     <div class="accordion" id="accordionExample">
@@ -20,11 +20,11 @@
           <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
             <div class="accordion-body">
               <strong>{{ $correspondence->object }}</strong>
-              <div>
+              <div class="h4">
                 Source : {{ $correspondence->source }}    
             </div> 
 
-            <div>
+            <div class="h4">
                 Destination : {{ $correspondence->destination }}    
             </div>
             </div>
@@ -35,7 +35,7 @@
         @csrf
  
          <div>
-             <label for="file" class="form-label">Fichiers</label>
+             <label for="file" class="form-label h3 mb-3 mt-3">Fichiers</label>
              <input class="form-control form-control-lg" id="file" type="file" name="files[]" multiple>
              <p class="mt-1 text-sm text-success" id="file_input_help">Extensions de fichier autorisées : PDF, PNG, JPG .</p>
          </div>
